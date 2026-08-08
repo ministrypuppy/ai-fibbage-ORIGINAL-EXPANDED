@@ -1,5 +1,5 @@
 /*******************************************************************************
- * BLUFF MASTER - SERVER BACKEND WITH ROBUST OPENAI & PERSISTENT FALLBACKS
+ * BLUFF MASTER - SERVER BACKEND WITH CLEANED SYNTAX
  ******************************************************************************/
 
 const express = require('express');
@@ -88,7 +88,6 @@ async function getNextFibbageQuestion() {
     }
     throw new Error("Invalid structure from OpenAI");
   } catch (err) {
-    // Enhanced error logging to pinpoint why OpenAI fails (e.g., missing API key, billing limits, etc.)
     console.error("OpenAI API call failed. Reason:", err.message);
     const q = fallbackQuestionVault[fallbackIndex % fallbackQuestionVault.length];
     fallbackIndex++;
@@ -255,7 +254,7 @@ io.on('connection', (socket) => {
       
       const totalPlayers = Object.keys(room.players).length;
       if (room.liesSubmitted >= totalPlayers) {
-        triggerVotingPhase(path => triggerVotingPhase(roomCode));
+        triggerVotingPhase(roomCode);
       }
     }
   });
@@ -272,10 +271,6 @@ io.on('connection', (socket) => {
         triggerRevealPhase(roomCode);
       }
     }
-  });
-
-  socket.on('togglePause', ({ roomCode -> { roomCode } }) => {
-    // Kept safe
   });
 
   socket.on('togglePause', ({ roomCode }) => {
