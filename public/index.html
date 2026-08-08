@@ -58,7 +58,7 @@
     <button onclick="showPlayerSetup()">Join Game (Phone)</button>
   </div>
 
-  <div id="view-host" class="card">
+  <div id="view-host" class="card hidden">
     <div class="pause-btn hidden" onclick="togglePause(event)" id="host-pause-btn" style="top: 15px; left: 15px; right: auto;">⏸ Pause</div>
     <div class="audio-controls" onclick="toggleMute(event)" id="mute-btn" style="top: 15px; right: 15px; left: auto;">🔊 Audio: ON</div>
     <h1 style="margin-top: 25px;">HOST SCREEN</h1>
@@ -81,7 +81,7 @@
     </div>
   </div>
 
-  <div id="view-player" class="card">
+  <div id="view-player" class="card hidden">
     <div class="pause-btn hidden" onclick="togglePause(event)" id="player-pause-btn" style="top: 15px; left: 15px; right: auto;">⏸ Pause</div>
     <div id="player-join" style="margin-top: 25px;">
       <h1>JOIN GAME</h1>
@@ -338,7 +338,6 @@
       currentRoom = roomCode.toUpperCase();
       document.getElementById('room-code-display').innerText = currentRoom;
       updateFooterCode(currentRoom);
-      // Show pause button during lobby so game can be paused before starting if needed
       document.getElementById('host-pause-btn').classList.remove('hidden');
     });
 
@@ -386,7 +385,6 @@
       myPausedByMe = false;
       document.body.classList.remove('urgent-timer');
 
-      // Show pause buttons during gameplay/submitting phases
       const hostPause = document.getElementById('host-pause-btn');
       const playerPause = document.getElementById('player-pause-btn');
       hostPause.classList.remove('hidden');
@@ -442,7 +440,6 @@
       document.getElementById('player-gameplay').classList.remove('hidden');
       document.getElementById('player-status').innerText = 'Connected! Waiting for host...';
       document.getElementById('lie-form').classList.add('hidden');
-      // Show pause button for joined player
       document.getElementById('player-pause-btn').classList.remove('hidden');
     });
 
@@ -461,7 +458,6 @@
       currentUrgentState = false;
       document.body.classList.remove('urgent-timer');
 
-      // Keep pause buttons visible during voting
       const hostPause = document.getElementById('host-pause-btn');
       const playerPause = document.getElementById('player-pause-btn');
       hostPause.classList.remove('hidden');
