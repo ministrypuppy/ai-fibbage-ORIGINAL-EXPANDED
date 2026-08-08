@@ -28,7 +28,6 @@ const fallbackLies = [
   "Faking a twin to skip work"
 ];
 
-// Curated humorous/risqué questions as fallback/supplement
 const partyTrivia = [
   {
     question: "In 2012, a man in New Zealand was arrested after calling the emergency services to complain about ____.",
@@ -67,13 +66,11 @@ function generateRoomCode() {
 }
 
 async function fetchAIQuestion() {
-  // 50% chance to pull from curated party trivia pool, 50% from API categories likely to yield silly facts
   if (Math.random() > 0.5) {
     return partyTrivia[Math.floor(Math.random() * partyTrivia.length)];
   }
 
   try {
-    // Categories: General Knowledge (9), Celebrities (26), Animals (27)
     const categories = [9, 26, 27];
     const cat = categories[Math.floor(Math.random() * categories.length)];
     const res = await fetch(`https://opentdb.com/api.php?amount=1&category=${cat}&type=multiple`);
@@ -98,14 +95,19 @@ function clearRoomTimers(room) {
     clearInterval(room.timer);
     room.timer = null;
   }
+  if (room.autoNextTimer) {
+    clearTimeout(room.autoNextTimer);
+    room.autoNextTimer = null;
+  }
 }
 
-function startPhaseTimer(room, duration, onTick, onExpire) {
+function startPhaseTimer(room, duration, cleanCode, onTick, onExpire) {
   clearRoomTimers(room);
   room.timeLeft = duration;
   onTick(room.timeLeft);
 
   room.timer = setInterval(() => {
+    if (room.isPaused) return;
     room.timeLeft--;
     onTick(room.timeLeft);
     if (room.timeLeft <= 0) {
@@ -155,6 +157,7 @@ function triggerVotingPhase(room, cleanCode) {
   startPhaseTimer(
     room,
     45,
+    cleanCode,
     (timeLeft) => io.to(cleanCode).emit('timerUpdate', { timeLeft, phase: 'VOTING' }),
     () => triggerRevealPhase(room, cleanCode)
   );
@@ -188,6 +191,46 @@ function triggerRevealPhase(room, cleanCode) {
     multiplier: room.multiplier,
     isGameOver: room.currentRound >= 6
   });
+
+  // 10-second automatic transition timer
+  room.autoNextTimer = setTimeout(() => {
+    if (room.state === 'REVEML' || room.state === 'REVEAL') {
+      startRoundForRoom(cleanCode, room);
+    }
+  }, 10000);
+}
+
+async function startRoundForRoom(cleanCode, room) {
+  clearRoomTimers(room);
+  if (room.currentRound >= 6) {
+    room.currentRound = 0;
+    Object.values(room.players).forEach(p => p.score = 0);
+  }
+
+  room.currentRound += 1;
+  room.multiplier = getMultiplier(room.currentRound);
+  room.state = 'SUBMITTING';
+  room.votes = {};
+  Object.keys(room.players).forEach(id => {
+    room.players[id].currentLie = '';
+  });
+
+  const qData = await fetchAIQuestion();
+  room.currentQuestion = qData;
+
+  io.to(cleanCode).emit('newRound', { 
+    question: qData.question, 
+    currentRound: room.currentRound,
+    multiplier: room.multiplier 
+  });
+
+  startPhaseTimer(
+    room,
+    45,
+    cleanCode,
+    (timeLeft) => io.to(cleanCode).emit('timerUpdate', { timeLeft, phase: 'SUBMITTING' }),
+    () => triggerVotingPhase(room, cleanCode)
+  );
 }
 
 io.on('connection', (socket) => {
@@ -206,7 +249,9 @@ io.on('connection', (socket) => {
       options: [],
       votes: {},
       timer: null,
-      timeLeft: 0
+      timeLeft: 0,
+      isPaused: false,
+      autoNextTimer: null
     };
     socket.join(code);
     socket.emit('roomCreated', { roomCode: code });
@@ -224,45 +269,25 @@ io.on('connection', (socket) => {
     io.to(room.hostId).emit('updatePlayers', Object.values(room.players));
   });
 
+  socket.on('togglePause', ({ roomCode }) => {
+    const cleanCode = roomCode ? roomCode.trim().toUpperCase() : '';
+    const room = rooms[cleanCode];
+    if (!room) return;
+    room.isPaused = !room.isPaused;
+    io.to(cleanCode).emit('pauseStateChanged', { paused: room.isPaused });
+  });
+
   socket.on('startRound', async (roomCode) => {
     const cleanCode = roomCode ? roomCode.trim().toUpperCase() : '';
     const room = rooms[cleanCode];
     if (!room) return;
-
-    if (room.currentRound >= 6) {
-      room.currentRound = 0;
-      Object.values(room.players).forEach(p => p.score = 0);
-    }
-
-    room.currentRound += 1;
-    room.multiplier = getMultiplier(room.currentRound);
-    room.state = 'SUBMITTING';
-    room.votes = {};
-    Object.keys(room.players).forEach(id => {
-      room.players[id].currentLie = '';
-    });
-
-    const qData = await fetchAIQuestion();
-    room.currentQuestion = qData;
-
-    io.to(cleanCode).emit('newRound', { 
-      question: qData.question, 
-      currentRound: room.currentRound,
-      multiplier: room.multiplier 
-    });
-
-    startPhaseTimer(
-      room,
-      45,
-      (timeLeft) => io.to(cleanCode).emit('timerUpdate', { timeLeft, phase: 'SUBMITTING' }),
-      () => triggerVotingPhase(room, cleanCode)
-    );
+    await startRoundForRoom(cleanCode, room);
   });
 
   socket.on('submitLie', ({ roomCode, lie }) => {
     const cleanCode = roomCode ? roomCode.trim().toUpperCase() : '';
     const room = rooms[cleanCode];
-    if (!room || !room.players[socket.id] || room.state !== 'SUBMITTING') return;
+    if (!room || room.isPaused || !room.players[socket.id] || room.state !== 'SUBMITTING') return;
 
     room.players[socket.id].currentLie = lie.trim();
 
@@ -279,7 +304,7 @@ io.on('connection', (socket) => {
   socket.on('submitVote', ({ roomCode, optionIndex }) => {
     const cleanCode = roomCode ? roomCode.trim().toUpperCase() : '';
     const room = rooms[cleanCode];
-    if (!room || !room.players[socket.id] || room.state !== 'VOTING') return;
+    if (!room || room.isPaused || !room.players[socket.id] || room.state !== 'VOTING') return;
 
     room.votes[socket.id] = optionIndex;
     const playerIds = Object.keys(room.players);
