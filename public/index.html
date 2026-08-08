@@ -127,6 +127,7 @@
     let currentUrgentState = false;
     let activeRoundNumber = 1;
     let isPaused = false;
+    let myPausedByMe = false;
     let revealCountdown = null;
 
     function userInteracted() {
@@ -272,11 +273,34 @@
       socket.emit('togglePause', { roomCode: currentRoom });
     }
 
-    socket.on('pauseStateChanged', ({ paused }) => {
+    socket.on('pauseStateChanged', ({ paused, pausedBy }) => {
       isPaused = paused;
-      const label = paused ? '▶ Resume' : '⏸ Pause';
-      document.getElementById('host-pause-btn').innerText = label;
-      document.getElementById('player-pause-btn').innerText = label;
+      myPausedByMe = (pausedBy === socket.id);
+      
+      const hostBtn = document.getElementById('host-pause-btn');
+      const playerBtn = document.getElementById('player-pause-btn');
+
+      if (paused) {
+        const label = '▶ Resume';
+        hostBtn.innerText = label;
+        playerBtn.innerText = label;
+        // If someone else paused it, disable the button for everyone else so they can't resume
+        if (!myPausedByMe) {
+          hostBtn.style.opacity = '0.5';
+          hostBtn.style.pointerEvents = 'none';
+          playerBtn.style.opacity = '0.5';
+          playerBtn.style.pointerEvents = 'none';
+        }
+      } else {
+        const label = '⏸ Pause';
+        hostBtn.innerText = label;
+        playerBtn.innerText = label;
+        hostBtn.style.opacity = '1';
+        hostBtn.style.pointerEvents = 'auto';
+        playerBtn.style.opacity = '1';
+        playerBtn.style.pointerEvents = 'auto';
+        myPausedByMe = false;
+      }
     });
 
     function hideAll() {
@@ -355,11 +379,21 @@
       currentPhase = 'SUBMITTING';
       activeRoundNumber = currentRound;
       currentUrgentState = false;
+      isPaused = false;
+      myPausedByMe = false;
       document.body.classList.remove('urgent-timer');
 
       // Hide pause buttons during submitting / voting portions
-      document.getElementById('host-pause-btn').classList.add('hidden');
-      document.getElementById('player-pause-btn').classList.add('hidden');
+      const hostPause = document.getElementById('host-pause-btn');
+      const playerPause = document.getElementById('player-pause-btn');
+      hostPause.classList.add('hidden');
+      playerPause.classList.add('hidden');
+      hostPause.style.opacity = '1';
+      hostPause.style.pointerEvents = 'auto';
+      playerPause.style.opacity = '1';
+      playerPause.style.pointerEvents = 'auto';
+      hostPause.innerText = '⏸ Pause';
+      playerPause.innerText = '⏸ Pause';
 
       const roundLabel = currentRound === 6 ? 'FINAL FIBBAGE (3x Points!)' : `Round ${currentRound}/6 (${multiplier}x Points)`;
 
@@ -408,7 +442,7 @@
 
     function submitLie() {
       const lie = document.getElementById('lie-input').value;
-      if (lie) {
+      if (lie && !isPaused) {
         socket.emit('submitLie', { roomCode: currentRoom, lie });
         document.getElementById('lie-form').classList.add('hidden');
         document.getElementById('player-status').innerText = 'Lie submitted! Waiting for others...';
@@ -422,8 +456,16 @@
       document.body.classList.remove('urgent-timer');
 
       // Hide pause buttons during voting portion as well
-      document.getElementById('host-pause-btn').classList.add('hidden');
-      document.getElementById('player-pause-btn').classList.add('hidden');
+      const hostPause = document.getElementById('host-pause-btn');
+      const playerPause = document.getElementById('player-pause-btn');
+      hostPause.classList.add('hidden');
+      playerPause.classList.add('hidden');
+      hostPause.style.opacity = '1';
+      hostPause.style.pointerEvents = 'auto';
+      playerPause.style.opacity = '1';
+      playerPause.style.pointerEvents = 'auto';
+      hostPause.innerText = '⏸ Pause';
+      playerPause.innerText = '⏸ Pause';
 
       if (!isHost) {
         document.getElementById('lie-form').classList.add('hidden');
@@ -445,6 +487,7 @@
     });
 
     function submitVote(idx) {
+      if (isPaused) return;
       socket.emit('submitVote', { roomCode: currentRoom, optionIndex: idx });
       document.getElementById('vote-form').classList.add('hidden');
       document.getElementById('player-status').innerText = 'Vote recorded! Look at the main screen.';
@@ -452,11 +495,21 @@
 
     socket.on('showReveal', ({ truth, players, currentRound, isGameOver }) => {
       currentUrgentState = false;
+      isPaused = false;
+      myPausedByMe = false;
       document.body.classList.remove('urgent-timer');
 
       // Show pause buttons between rounds (during reveal/standby phase)
-      document.getElementById('host-pause-btn').classList.remove('hidden');
-      document.getElementById('player-pause-btn').classList.remove('hidden');
+      const hostPause = document.getElementById('host-pause-btn');
+      const playerPause = document.getElementById('player-pause-btn');
+      hostPause.classList.remove('hidden');
+      playerPause.classList.remove('hidden');
+      hostPause.style.opacity = '1';
+      hostPause.style.pointerEvents = 'auto';
+      playerPause.style.opacity = '1';
+      playerPause.style.pointerEvents = 'auto';
+      hostPause.innerText = '⏸ Pause';
+      playerPause.innerText = '⏸ Pause';
 
       if (isHost) {
         stopMusic();
@@ -501,6 +554,7 @@
         
         if (revealCountdown) clearInterval(revealCountdown);
         revealCountdown = setInterval(() => {
+          if (isPaused) return; // Freeze auto-continue timer when paused
           timeLeft--;
           if (timeLeft > 0) {
             timerEl.innerText = `Auto-continuing in ${timeLeft}s...`;

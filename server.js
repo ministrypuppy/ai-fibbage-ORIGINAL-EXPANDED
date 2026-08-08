@@ -207,6 +207,8 @@ function triggerRevealPhase(room, cleanCode) {
 
 async function startRoundForRoom(cleanCode, room) {
   clearRoomTimers(room);
+  room.isPaused = false;
+  room.pausedBy = null;
   if (room.currentRound >= 6) {
     room.currentRound = 0;
     Object.values(room.players).forEach(p => p.score = 0);
@@ -256,6 +258,7 @@ io.on('connection', (socket) => {
       timer: null,
       timeLeft: 0,
       isPaused: false,
+      pausedBy: null,
       autoNextTimer: null
     };
     socket.join(code);
@@ -277,17 +280,33 @@ io.on('connection', (socket) => {
   socket.on('togglePause', ({ roomCode }) => {
     const cleanCode = roomCode ? roomCode.trim().toUpperCase() : '';
     const room = rooms[cleanCode];
-    if (!room || room.state === 'SUBMITTING' || room.state === 'VOTING') return;
-    room.isPaused = !room.isPaused;
-    io.to(cleanCode).emit('pauseStateChanged', { paused: room.isPaused });
+    // Only allow pausing during REVEAL or LOBBY (not submitting/voting phases)
+    if (!room || (room.state === 'SUBMITTING' || room.state === 'VOTING')) return;
+
+    if (!room.isPaused) {
+      // Pause immediately
+      room.isPaused = true;
+      room.pausedBy = socket.id;
+    } else {
+      // Only the person who paused it can unpause it
+      if (room.pausedBy === socket.id) {
+        room.isPaused = false;
+        room.pausedBy = null;
+      } else {
+        return; // Ignore if someone else tries to unpause
+      }
+    }
+
+    io.to(cleanCode).emit('pauseStateChanged', { paused: room.isPaused, pausedBy: room.pausedBy });
   });
 
   socket.on('startRound', async (roomCode) => {
     const cleanCode = roomCode ? roomCode.trim().toUpperCase() : '';
     const room = rooms[cleanCode];
-    if (!room) return;
+    if (!room || room.isPaused) return; // Prevent next round while paused
     room.isPaused = false;
-    io.to(cleanCode).emit('pauseStateChanged', { paused: false });
+    room.pausedBy = null;
+    io.to(cleanCode).emit('pauseStateChanged', { paused: false, pausedBy: null });
     await startRoundForRoom(cleanCode, room);
   });
 
