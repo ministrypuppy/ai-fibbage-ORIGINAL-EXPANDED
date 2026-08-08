@@ -1,5 +1,5 @@
 /*******************************************************************************
- * BLUFF MASTER - SERVER BACKEND WITH OPENAI GPT-4O & CLEAN FALLBACK PROMPTS
+ * BLUFF MASTER - SERVER BACKEND WITH ROBUST OPENAI & PERSISTENT FALLBACKS
  ******************************************************************************/
 
 const express = require('express');
@@ -51,7 +51,7 @@ const fallbackQuestionVault = [
   }
 ];
 
-// Expand fallback vault programmatically to 10,000 items without appending variant text
+// Expand fallback vault programmatically to 10,000 items instantly on boot
 while (fallbackQuestionVault.length < 10000) {
   const base = fallbackQuestionVault[fallbackQuestionVault.length % 5];
   fallbackQuestionVault.push({
@@ -88,7 +88,8 @@ async function getNextFibbageQuestion() {
     }
     throw new Error("Invalid structure from OpenAI");
   } catch (err) {
-    console.warn("OpenAI API call failed or timed out. Falling back to backup vault.", err.message);
+    // Enhanced error logging to pinpoint why OpenAI fails (e.g., missing API key, billing limits, etc.)
+    console.error("OpenAI API call failed. Reason:", err.message);
     const q = fallbackQuestionVault[fallbackIndex % fallbackQuestionVault.length];
     fallbackIndex++;
     return q;
@@ -254,7 +255,7 @@ io.on('connection', (socket) => {
       
       const totalPlayers = Object.keys(room.players).length;
       if (room.liesSubmitted >= totalPlayers) {
-        triggerVotingPhase(roomCode);
+        triggerVotingPhase(path => triggerVotingPhase(roomCode));
       }
     }
   });
@@ -271,6 +272,10 @@ io.on('connection', (socket) => {
         triggerRevealPhase(roomCode);
       }
     }
+  });
+
+  socket.on('togglePause', ({ roomCode -> { roomCode } }) => {
+    // Kept safe
   });
 
   socket.on('togglePause', ({ roomCode }) => {
