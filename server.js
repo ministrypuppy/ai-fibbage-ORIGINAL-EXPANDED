@@ -11,6 +11,9 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
+// Serve static files (like index.html) from the root folder
+app.use(express.static(__dirname));
+
 // Initialize OpenAI client (Ensure OPENAI_API_KEY is set in your environment variables)
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
