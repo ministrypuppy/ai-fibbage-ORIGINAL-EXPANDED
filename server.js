@@ -1,5 +1,5 @@
 /*******************************************************************************
- * BLUFF MASTER - SERVER BACKEND WITH OPENAI GPT-4O & RANDOMIZED 10,000 FALLBACKS
+ * BLUFF MASTER - SERVER BACKEND WITH OPENAI GPT-4O & CLEAN FALLBACK PROMPTS
  ******************************************************************************/
 
 const express = require('express');
@@ -51,12 +51,12 @@ const fallbackQuestionVault = [
   }
 ];
 
-// Expand fallback vault programmatically to 10,000 items with unique variants
+// Expand fallback vault programmatically to 10,000 items without appending variant text
 while (fallbackQuestionVault.length < 10000) {
   const base = fallbackQuestionVault[fallbackQuestionVault.length % 5];
   fallbackQuestionVault.push({
     category: base.category,
-    prompt: `${base.prompt} (Variant ${fallbackQuestionVault.length + 1})`,
+    prompt: base.prompt,
     answer: base.answer,
     decoys: [...base.decoys]
   });
