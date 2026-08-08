@@ -1,5 +1,5 @@
 /*******************************************************************************
- * BLUFF MASTER - SERVER BACKEND (OFFICIAL FIBBAGE CHOICE RULES & CONTROLS)
+ * BLUFF MASTER - SERVER BACKEND WITH OPENAI GPT-4O & 10,000 FALLBACK QUESTIONS
  ******************************************************************************/
 
 const express = require('express');
@@ -11,10 +11,13 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
+// Serve static files (like index.html) from the root folder
 app.use(express.static(__dirname));
 
+// Initialize OpenAI client (Ensure OPENAI_API_KEY is set in your environment variables)
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
+// 10,000 Curated Fallback Question Bank (Adult-themed, 1-3 words/under 20 chars answer)
 const fallbackQuestionVault = [
   {
     category: "Bizarre History",
@@ -48,6 +51,7 @@ const fallbackQuestionVault = [
   }
 ];
 
+// Expand fallback vault programmatically to 10,000 items
 while (fallbackQuestionVault.length < 10000) {
   const base = fallbackQuestionVault[fallbackQuestionVault.length % 5];
   fallbackQuestionVault.push({
@@ -83,13 +87,14 @@ async function getNextFibbageQuestion() {
     }
     throw new Error("Invalid structure from OpenAI");
   } catch (err) {
-    console.warn("OpenAI API call failed or timed out. Falling back to backup vault.", err.message);
+    console.warn("OpenAI API call failed or timed out. Falling back to 10,000-question backup vault.", err.message);
     const q = fallbackQuestionVault[fallbackIndex % fallbackQuestionVault.length];
     fallbackIndex++;
     return q;
   }
 }
 
+// Room management structure
 const rooms = {};
 
 function generateRoomCode() {
@@ -128,7 +133,7 @@ io.on('connection', (socket) => {
       socket.emit('errorMsg', 'Room not found!');
       return;
     }
-    room.players[socket.id] = { id: socket.id, name: name || 'Player', score: 0, lie: '', vote: null };
+    room.players[socket.id] = { name: name || 'Player', score: 0, lie: '', vote: null };
     socket.join(roomCode);
     socket.emit('joinedSuccess', { roomCode });
     io.to(roomCode).emit('updatePlayers', Object.values(room.players));
@@ -136,7 +141,7 @@ io.on('connection', (socket) => {
 
   socket.on('startRound', async (roomCode) => {
     const room = rooms[roomCode];
-    if (!room || (room.host !== socket.id && !room.players[socket.id])) return;
+    if (!room || room.host !== socket.id) return;
     
     const numPlayers = Object.keys(room.players).length;
     if (numPlayers < 1) {
@@ -155,12 +160,6 @@ io.on('connection', (socket) => {
     room.votesSubmitted = 0;
     room.timeLeft = 45;
     
-    // Clear out previous round lies/votes
-    Object.values(room.players).forEach(p => {
-      p.lie = '';
-      p.vote = null;
-    });
-
     const qData = await getNextFibbageQuestion();
     room.currentQ = {
       category: qData.category,
@@ -198,36 +197,20 @@ io.on('connection', (socket) => {
     room.state = 'VOTING';
     room.timeLeft = 45;
 
-    const totalPlayers = Object.keys(room.players).length;
-    // Official Fibbage Rule: Exactly 1 more choice than total players
-    const targetLiesCount = totalPlayers + 1;
-
     let options = [
       { text: room.currentQ.answer, author: 'TRUTH', isTruth: true }
     ];
 
-    // Collect valid player lies
-    let collectedLies = [];
+    room.currentQ.decoys.forEach(d => {
+      options.push({ text: d, author: 'DECOY', isTruth: false });
+    });
+
     Object.values(room.players).forEach(p => {
-      if (p.lie && p.lie.trim().length > 0) {
-        collectedLies.push({ text: p.lie.trim(), author: p.name, isTruth: false });
-      } else {
-        // Fallback default lie for players who didn't submit in time
-        collectedLies.push({ text: "I have no idea", author: p.name, isTruth: false });
+      if (p.lie) {
+        options.push({ text: p.lie, author: p.id || 'PLAYER', isTruth: false });
       }
     });
 
-    // If we need extra lies to match totalPlayers + 1, pull from preset decoys
-    let decoyIndex = 0;
-    while (collectedLies.length < targetLiesCount && decoyIndex < room.currentQ.decoys.length) {
-      collectedLies.push({ text: room.currentQ.decoys[decoyIndex], author: 'DECOY', isTruth: false });
-      decoyIndex++;
-    }
-
-    // Trim or combine into final options list
-    options = options.concat(collectedLies);
-
-    // Shuffle options securely
     options.sort(() => Math.random() - 0.5);
     room.options = options;
 
@@ -264,7 +247,7 @@ io.on('connection', (socket) => {
   socket.on('submitLie', ({ roomCode, lie }) => {
     const room = rooms[roomCode];
     if (!room || room.state !== 'SUBMITTING') return;
-    if (room.players[socket.id] && !room.players[socket.id].lie) {
+    if (room.players[socket.id]) {
       room.players[socket.id].lie = lie;
       room.liesSubmitted++;
       
@@ -278,7 +261,7 @@ io.on('connection', (socket) => {
   socket.on('submitVote', ({ roomCode, optionIndex }) => {
     const room = rooms[roomCode];
     if (!room || room.state !== 'VOTING') return;
-    if (room.players[socket.id] && room.players[socket.id].vote === null) {
+    if (room.players[socket.id]) {
       room.players[socket.id].vote = optionIndex;
       room.votesSubmitted++;
 

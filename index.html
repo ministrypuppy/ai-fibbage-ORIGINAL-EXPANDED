@@ -1,238 +1,573 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bluff Master</title>
-    <script src="/socket.io/socket.io.js"></script>
-    <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: #121212; 
-            color: #ffffff; 
-            text-align: center; 
-            margin: 0; 
-            padding: 40px 20px; 
-        }
-        .hidden { display: none !important; }
-        button { 
-            background: #e50914; 
-            border: none; 
-            padding: 14px 28px; 
-            font-size: 18px; 
-            font-weight: bold; 
-            color: #ffffff;
-            cursor: pointer; 
-            border-radius: 8px; 
-            margin: 12px; 
-            transition: background 0.2s ease, transform 0.1s ease;
-        }
-        button:hover { 
-            background: #f40612;
-            transform: scale(1.02);
-        }
-        input { 
-            padding: 14px; 
-            font-size: 16px; 
-            border-radius: 6px; 
-            border: 2px solid #333; 
-            background: #1e1e1e;
-            color: #fff;
-            width: 80%; 
-            max-width: 320px; 
-            margin: 10px; 
-            outline: none;
-            text-align: center;
-        }
-        input:focus {
-            border-color: #e50914;
-        }
-        .card { 
-            background: #1a1a1a; 
-            padding: 40px 30px; 
-            border-radius: 12px; 
-            display: inline-block; 
-            box-shadow: 0 8px 25px rgba(0,0,0,0.8); 
-            max-width: 500px; 
-            width: 100%; 
-            border: 1px solid #333;
-        }
-        h1 {
-            color: #e50914;
-            margin-bottom: 5px;
-        }
-        p {
-            color: #b0b0b0;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bluff Master - AI Fibbage</title>
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: #121212; color: #fff; text-align: center; padding: 20px; transition: background-color 0.3s; padding-bottom: 60px; }
+    .card { background: #1e1e2e; padding: 25px; border-radius: 12px; max-width: 600px; margin: 20px auto; box-shadow: 0 4px 15px rgba(0,0,0,0.5); position: relative; transition: border 0.3s; }
+    h1 { color: #ff0055; margin-bottom: 15px; font-size: 2.2rem; }
+    input, button { width: 100%; padding: 14px; margin: 10px 0; border-radius: 8px; border: none; font-size: 1.1rem; }
+    input { background: #2a2a3c; color: white; }
+    button { background: #ff0055; color: white; font-weight: bold; cursor: pointer; transition: 0.2s; }
+    button:hover { background: #ff2a75; }
+    .room-code { font-size: 3rem; font-weight: bold; letter-spacing: 5px; color: #00e5ff; }
+    .option-btn { background: #2a2a3c; text-align: left; margin: 8px 0; }
+    .hidden { display: none; }
+    ul { list-style: none; text-align: left; margin: 10px 0; }
+    li { padding: 8px 0; border-bottom: 1px solid #333; }
+    .audio-controls { position: absolute; top: 15px; right: 15px; background: #2a2a3c; padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; border: 1px solid #444; z-index: 10; }
+    .pause-btn { position: absolute; top: 15px; left: 15px; background: #2a2a3c; padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; border: 1px solid #444; z-index: 10; color: #ffcc00; font-weight: bold; }
+    .timer-bar-container { width: 100%; background: #2a2a3c; height: 12px; border-radius: 6px; overflow: hidden; margin: 15px 0; }
+    .timer-bar { height: 100%; background: #00e5ff; width: 100%; transition: width 1s linear, background-color 0.3s; }
+    .badge { display: inline-block; background: #ff0055; color: #fff; padding: 4px 12px; border-radius: 12px; font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; }
+    
+    .room-code-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: #181824; padding: 8px; font-size: 0.9rem; color: #888; border-top: 1px solid #2a2a3c; z-index: 100; }
+    .room-code-footer span { color: #00e5ff; font-weight: bold; letter-spacing: 2px; font-size: 1rem; }
+
+    @keyframes warningPulse {
+      0% { background-color: #121212; }
+      50% { background-color: #3b0010; }
+      100% { background-color: #121212; }
+    }
+    
+    @keyframes cardWarningPulse {
+      0% { border: 2px solid transparent; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+      50% { border: 2px solid #ff0055; box-shadow: 0 0 25px rgba(255, 0, 85, 0.6); }
+      100% { border: 2px solid transparent; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+    }
+
+    body.urgent-timer {
+      animation: warningPulse 0.8s infinite;
+    }
+
+    body.urgent-timer .card {
+      animation: cardWarningPulse 0.8s infinite;
+    }
+  </style>
 </head>
-<body>
+<body onclick="userInteracted()">
 
-    <div id="app">
-        <!-- LOBBY SCREEN -->
-        <div id="lobby-screen" class="card">
-            <h1>Bluff Master</h1>
-            <p>An adult-themed party bluffing game</p>
-            <div id="menu-options">
-                <button onclick="showCreateRoom()">Create Room</button>
-                <br>
-                <input type="text" id="room-code-input" placeholder="ROOM CODE (E.G. ABCD)" maxlength="4" style="text-transform: uppercase;">
-                <br>
-                <input type="text" id="player-name-input" placeholder="Your Name" maxlength="15">
-                <br>
-                <button onclick="joinRoom()">Join Room</button>
-            </div>
-        </div>
+  <div id="view-landing" class="card">
+    <div class="audio-controls" onclick="toggleMute(event)" id="landing-mute-btn">🔊 Audio: ON</div>
+    <h1>BLUFF MASTER</h1>
+    <button onclick="showHostSetup()">Host Game (TV / Tablet)</button>
+    <button onclick="showPlayerSetup()">Join Game (Phone)</button>
+  </div>
 
-        <!-- WAITING ROOM / HOST SCREEN -->
-        <div id="room-screen" class="card hidden">
-            <h2 id="display-room-code" style="color: #e50914;">Room: </h2>
-            <h3>Players in Room:</h3>
-            <ul id="players-list" style="list-style: none; padding: 0; font-size: 18px;"></ul>
-            <div id="host-controls" class="hidden">
-                <button onclick="startRound()">Start Game / Next Round</button>
-            </div>
-            <p id="waiting-msg" class="hidden">Waiting for host to start...</p>
-        </div>
-
-        <!-- SUBMITTING LIE SCREEN -->
-        <div id="submit-screen" class="card hidden">
-            <h2 id="round-title" style="color: #e50914;">Round 1</h2>
-            <p id="question-prompt" style="font-size: 20px; font-weight: bold; color: #fff;"></p>
-            <p>Type a believable lie so other players vote for it!</p>
-            <input type="text" id="lie-input" placeholder="Your fake answer..." maxlength="30">
-            <br>
-            <button onclick="submitLie()">Submit Lie</button>
-            <p id="timer-display" style="font-size: 18px; font-weight: bold; color: #e50914;">Time Left: 45s</p>
-        </div>
-
-        <!-- VOTING SCREEN -->
-        <div id="voting-screen" class="card hidden">
-            <h2 style="color: #e50914;">Vote for the Truth!</h2>
-            <div id="voting-options"></div>
-            <p id="vote-timer-display" style="font-size: 18px; font-weight: bold; color: #e50914;">Time Left: 45s</p>
-        </div>
-
-        <!-- REVEAL SCREEN -->
-        <div id="reveal-screen" class="card hidden">
-            <h2 style="color: #e50914;">Round Results</h2>
-            <p>The real truth was:</p>
-            <h3 id="reveal-truth" style="font-size: 24px; color: #4CAF50;"></h3>
-            <div id="reveal-scores"></div>
-            <br>
-            <button onclick="startRound()">Continue to Next Round</button>
-        </div>
+  <div id="view-host" class="card hidden">
+    <div class="pause-btn hidden" onclick="togglePause(event)" id="host-pause-btn" style="top: 15px; left: 15px; right: auto;">⏸ Pause</div>
+    <div class="audio-controls" onclick="toggleMute(event)" id="mute-btn" style="top: 15px; right: 15px; left: auto;">🔊 Audio: ON</div>
+    <h1 style="margin-top: 25px;">HOST SCREEN</h1>
+    <div id="host-lobby">
+      <p>Join at this URL on your phone!</p>
+      <p>ROOM CODE:</p>
+      <div id="room-code-display" class="room-code">----</div>
+      <h3>Players Joined:</h3>
+      <ul id="player-list"></ul>
+      <button onclick="startRound()">Start Game</button>
     </div>
 
-    <script>
-        const socket = io();
-        let currentRoomCode = '';
+    <div id="host-gameplay" class="hidden">
+      <div id="round-badge" class="badge">Round 1/6 (1x Points)</div>
+      <div class="timer-bar-container"><div id="host-timer-bar" class="timer-bar"></div></div>
+      <h2 id="host-question" style="color: #00e5ff; margin-bottom: 20px;"></h2>
+      <p id="host-status" style="font-size: 1.2rem;"></p>
+      <div id="host-reveal" class="hidden"></div>
+      <button id="next-btn" class="hidden" onclick="startRound()">Next Round</button>
+    </div>
+  </div>
 
-        function showCreateRoom() {
-            socket.emit('createRoom');
+  <div id="view-player" class="card hidden">
+    <div class="pause-btn hidden" onclick="togglePause(event)" id="player-pause-btn" style="top: 15px; left: 15px; right: auto;">⏸ Pause</div>
+    <div id="player-join" style="margin-top: 25px;">
+      <h1>JOIN GAME</h1>
+      <input type="text" id="join-code" placeholder="4-Letter Room Code" style="text-transform: uppercase;">
+      <input type="text" id="join-name" placeholder="Your Name">
+      <button onclick="joinRoom()">Join Room</button>
+    </div>
+
+    <div id="player-gameplay" class="hidden" style="margin-top: 25px;">
+      <div id="player-round-badge" class="badge">Round 1/6</div>
+      <div class="timer-bar-container"><div id="player-timer-bar" class="timer-bar"></div></div>
+      <p id="player-status" style="color: #00e5ff; font-weight: bold; margin-bottom: 15px;"></p>
+      
+      <div id="lie-form">
+        <input type="text" id="lie-input" placeholder="Type your believable lie...">
+        <button onclick="submitLie()">Submit Lie</button>
+      </div>
+
+      <div id="vote-form" class="hidden">
+        <h3>Pick the Real Answer:</h3>
+        <div id="options-container"></div>
+      </div>
+
+      <div id="player-reveal-actions" class="hidden" style="margin-top: 15px;">
+        <p id="auto-continue-timer" style="color: #ff0055; font-weight: bold; margin-bottom: 10px;"></p>
+        <button id="player-next-btn" onclick="startRound()">Continue to Next Round</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-code" class="room-code-footer hidden">
+    ROOM CODE: <span id="footer-code-display">----</span>
+  </div>
+
+  <script>
+    const socket = io();
+    let currentRoom = '';
+    let isHost = false;
+    let isMuted = false;
+    let audioCtx = null;
+    let musicInterval = null;
+    let currentPhase = 'LANDING';
+    let currentUrgentState = false;
+    let activeRoundNumber = 1;
+    let isPaused = false;
+    let myPausedByMe = false;
+    let revealCountdown = null;
+
+    function userInteracted() {
+      initAudio();
+      if ((currentPhase === 'LANDING' || currentPhase === 'GAMEOVER') && !musicInterval && !isMuted) {
+        playChillTheme();
+      }
+    }
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playTone(freq, type, duration, delay = 0, vol = 0.1) {
+      if (isMuted || !audioCtx) return;
+      setTimeout(() => {
+        try {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+          gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + duration);
+        } catch(e){}
+      }, delay);
+    }
+
+    function stopMusic() {
+      if (musicInterval) {
+        clearInterval(musicInterval);
+        musicInterval = null;
+      }
+    }
+
+    function playChillTheme() {
+      stopMusic();
+      if (isMuted) return;
+      initAudio();
+      const notes = [196.00, 246.94, 293.66, 369.99, 293.66, 246.94];
+      let step = 0;
+      musicInterval = setInterval(() => {
+        playTone(notes[step % notes.length], 'sine', 0.25, 0, 0.04);
+        step++;
+      }, 260);
+    }
+
+    function playLobbyMusic() {
+      stopMusic();
+      if (!isHost || isMuted) return;
+      initAudio();
+      const notes = [261.63, 329.63, 392.00, 523.25, 392.00, 329.63];
+      let step = 0;
+      musicInterval = setInterval(() => {
+        playTone(notes[step % notes.length], 'sine', 0.2, 0, 0.05);
+        step++;
+      }, 300);
+    }
+
+    function playThinkingMusic(isUrgent = false, isFinalRound = false) {
+      stopMusic();
+      if (!isHost || isMuted) return;
+      initAudio();
+
+      let notes, tempo, type, vol;
+
+      if (isFinalRound) {
+        notes = isUrgent 
+          ? [110.00, 116.54, 123.47, 130.81, 123.47, 116.54]
+          : [110.00, 130.81, 164.81, 130.81];
+        tempo = isUrgent ? 140 : 280;
+        type = 'sawtooth';
+        vol = isUrgent ? 0.12 : 0.1;
+      } else {
+        notes = isUrgent 
+          ? [220.00, 233.08, 261.63, 233.08]
+          : [146.83, 174.61, 220.00, 174.61];
+        tempo = isUrgent ? 220 : 500;
+        type = isUrgent ? 'sawtooth' : 'triangle';
+        vol = isUrgent ? 0.09 : 0.08;
+      }
+
+      let step = 0;
+      musicInterval = setInterval(() => {
+        if (!isPaused) {
+          playTone(notes[step % notes.length], type, 0.2, 0, vol);
+          step++;
+        }
+      }, tempo);
+    }
+
+    function playJoinSound() { initAudio(); playTone(440, 'sine', 0.1, 0, 0.1); playTone(880, 'sine', 0.15, 80, 0.1); }
+    function playTickSound() { initAudio(); playTone(800, 'square', 0.05, 0, 0.03); }
+
+    function playRoundRevealSound(round) {
+      initAudio();
+      if (round <= 3) {
+        playTone(300, 'triangle', 0.2, 0, 0.08);
+        playTone(450, 'triangle', 0.25, 120, 0.08);
+      } else if (round <= 5) {
+        playTone(400, 'sawtooth', 0.15, 0, 0.09);
+        playTone(600, 'sawtooth', 0.15, 90, 0.09);
+        playTone(800, 'sawtooth', 0.3, 180, 0.1);
+      } else {
+        for (let i = 0; i < 18; i++) {
+          playTone(150 + Math.random() * 800, 'square', 0.06, i * 40, 0.08);
+        }
+      }
+    }
+
+    function playGrandFinaleSound() {
+      initAudio();
+      playTone(523.25, 'triangle', 0.3, 0, 0.12);
+      playTone(659.25, 'triangle', 0.3, 120, 0.12);
+      playTone(783.99, 'triangle', 0.3, 240, 0.12);
+      playTone(1046.50, 'triangle', 0.8, 360, 0.15);
+    }
+
+    function toggleMute(e) {
+      if (e) e.stopPropagation();
+      isMuted = !isMuted;
+      const label = isMuted ? '🔇 Audio: OFF' : '🔊 Audio: ON';
+      document.getElementById('mute-btn').innerText = label;
+      document.getElementById('landing-mute-btn').innerText = label;
+
+      if (isMuted) {
+        stopMusic();
+      } else {
+        if (currentPhase === 'LANDING' || currentPhase === 'GAMEOVER') playChillTheme();
+        else if (currentPhase === 'LOBBY' && isHost) playLobbyMusic();
+        else if ((currentPhase === 'SUBMITTING' || currentPhase === 'VOTING') && isHost) playThinkingMusic(currentUrgentState, activeRoundNumber === 6);
+      }
+    }
+
+    function togglePause(e) {
+      if (e) e.stopPropagation();
+      socket.emit('togglePause', { roomCode: currentRoom });
+    }
+
+    socket.on('pauseStateChanged', ({ paused, pausedBy }) => {
+      isPaused = paused;
+      myPausedByMe = (pausedBy === socket.id);
+      
+      const hostBtn = document.getElementById('host-pause-btn');
+      const playerBtn = document.getElementById('player-pause-btn');
+
+      if (paused) {
+        const label = '▶ Resume';
+        hostBtn.innerText = label;
+        playerBtn.innerText = label;
+        if (!myPausedByMe) {
+          hostBtn.style.opacity = '0.5';
+          hostBtn.style.pointerEvents = 'none';
+          playerBtn.style.opacity = '0.5';
+          playerBtn.style.pointerEvents = 'none';
+        }
+      } else {
+        const label = '⏸ Pause';
+        hostBtn.innerText = label;
+        playerBtn.innerText = label;
+        hostBtn.style.opacity = '1';
+        hostBtn.style.pointerEvents = 'auto';
+        playerBtn.style.opacity = '1';
+        playerBtn.style.pointerEvents = 'auto';
+        myPausedByMe = false;
+      }
+    });
+
+    function hideAll() {
+      ['view-landing', 'view-host', 'view-player'].forEach(id => {
+        document.getElementById(id).classList.add('hidden');
+      });
+    }
+
+    function showHostSetup() {
+      hideAll();
+      currentPhase = 'LOBBY';
+      document.getElementById('view-host').classList.remove('hidden');
+      isHost = true;
+      initAudio();
+      socket.emit('createRoom');
+      playLobbyMusic();
+    }
+
+    function showPlayerSetup() {
+      hideAll();
+      currentPhase = 'PLAYER_JOIN';
+      stopMusic();
+      document.getElementById('view-player').classList.remove('hidden');
+    }
+
+    function updateFooterCode(code) {
+      if (code) {
+        document.getElementById('footer-code-display').innerText = code;
+        document.getElementById('footer-code').classList.remove('hidden');
+      }
+    }
+
+    socket.on('roomCreated', ({ roomCode }) => {
+      currentRoom = roomCode.toUpperCase();
+      document.getElementById('room-code-display').innerText = currentRoom;
+      updateFooterCode(currentRoom);
+      document.getElementById('host-pause-btn').classList.remove('hidden');
+    });
+
+    socket.on('updatePlayers', (players) => {
+      playJoinSound();
+      const list = document.getElementById('player-list');
+      list.innerHTML = players.map(p => `<li>${p.name} - ${p.score} pts</li>`).join('');
+    });
+
+    socket.on('hostStatusUpdate', (msg) => {
+      if (isHost) document.getElementById('host-status').innerText = msg;
+    });
+
+    socket.on('timerUpdate', ({ timeLeft }) => {
+      const pct = (timeLeft / 45) * 100;
+      const hostBar = document.getElementById('host-timer-bar');
+      const playerBar = document.getElementById('player-timer-bar');
+      
+      [hostBar, playerBar].forEach(bar => {
+        if (bar) {
+          bar.style.width = pct + '%';
+          bar.style.backgroundColor = timeLeft <= 10 ? '#ff0055' : '#00e5ff';
+        }
+      });
+
+      if (timeLeft <= 10 && !currentUrgentState) {
+        currentUrgentState = true;
+        document.body.classList.add('urgent-timer');
+        if (isHost) playThinkingMusic(true, activeRoundNumber === 6);
+      } else if (timeLeft > 10 && currentUrgentState) {
+        currentUrgentState = false;
+        document.body.classList.remove('urgent-timer');
+      }
+    });
+
+    socket.on('newRound', ({ question, currentRound, multiplier }) => {
+      if (revealCountdown) {
+        clearInterval(revealCountdown);
+        revealCountdown = null;
+      }
+      currentPhase = 'SUBMITTING';
+      activeRoundNumber = currentRound;
+      currentUrgentState = false;
+      isPaused = false;
+      myPausedByMe = false;
+      document.body.classList.remove('urgent-timer');
+
+      const hostPause = document.getElementById('host-pause-btn');
+      const playerPause = document.getElementById('player-pause-btn');
+      hostPause.classList.remove('hidden');
+      playerPause.classList.remove('hidden');
+      hostPause.style.opacity = '1';
+      hostPause.style.pointerEvents = 'auto';
+      playerPause.style.opacity = '1';
+      playerPause.style.pointerEvents = 'auto';
+      hostPause.innerText = '⏸ Pause';
+      playerPause.innerText = '⏸ Pause';
+
+      const roundLabel = currentRound === 6 ? 'FINAL FIBBAGE (3x Points!)' : `Round ${currentRound}/6 (${multiplier}x Points)`;
+
+      if (isHost) {
+        playThinkingMusic(false, currentRound === 6);
+        document.getElementById('host-lobby').classList.add('hidden');
+        document.getElementById('host-gameplay').classList.remove('hidden');
+        document.getElementById('host-reveal').classList.add('hidden');
+        document.getElementById('next-btn').classList.add('hidden');
+        document.getElementById('round-badge').innerText = roundLabel;
+        document.getElementById('host-question').innerText = question;
+        document.getElementById('host-status').innerText = 'Waiting for player lies...';
+      } else {
+        document.getElementById('player-join').classList.add('hidden');
+        document.getElementById('player-gameplay').classList.remove('hidden');
+        document.getElementById('lie-form').classList.remove('hidden');
+        document.getElementById('vote-form').classList.add('hidden');
+        document.getElementById('player-reveal-actions').classList.add('hidden');
+        document.getElementById('player-round-badge').innerText = roundLabel;
+        document.getElementById('player-status').innerText = question;
+        document.getElementById('lie-input').value = '';
+      }
+    });
+
+    function startRound() {
+      if (isPaused) return;
+      socket.emit('startRound', currentRoom);
+    }
+
+    function joinRoom() {
+      const code = document.getElementById('join-code').value.trim().toUpperCase();
+      const name = document.getElementById('join-name').value.trim();
+      if (code && name) {
+        currentRoom = code;
+        socket.emit('joinRoom', { roomCode: code, name });
+      }
+    }
+
+    socket.on('joinedSuccess', ({ roomCode }) => {
+      currentRoom = roomCode.toUpperCase();
+      updateFooterCode(currentRoom);
+      document.getElementById('player-join').classList.add('hidden');
+      document.getElementById('player-gameplay').classList.remove('hidden');
+      document.getElementById('player-status').innerText = 'Connected! Waiting for host...';
+      document.getElementById('lie-form').classList.add('hidden');
+      document.getElementById('player-pause-btn').classList.remove('hidden');
+    });
+
+    function submitLie() {
+      const lie = document.getElementById('lie-input').value;
+      if (lie && !isPaused) {
+        socket.emit('submitLie', { roomCode: currentRoom, lie });
+        document.getElementById('lie-form').classList.add('hidden');
+        document.getElementById('player-status').innerText = 'Lie submitted! Waiting for others...';
+      }
+    }
+
+    socket.on('startVoting', ({ options, currentRound }) => {
+      currentPhase = 'VOTING';
+      if (currentRound) activeRoundNumber = currentRound;
+      currentUrgentState = false;
+      document.body.classList.remove('urgent-timer');
+
+      const hostPause = document.getElementById('host-pause-btn');
+      const playerPause = document.getElementById('player-pause-btn');
+      hostPause.classList.remove('hidden');
+      playerPause.classList.remove('hidden');
+      hostPause.style.opacity = '1';
+      hostPause.style.pointerEvents = 'auto';
+      playerPause.style.opacity = '1';
+      playerPause.style.pointerEvents = 'auto';
+      hostPause.innerText = '⏸ Pause';
+      playerPause.innerText = '⏸ Pause';
+
+      if (!isHost) {
+        document.getElementById('lie-form').classList.add('hidden');
+        document.getElementById('vote-form').classList.remove('hidden');
+        document.getElementById('player-status').innerText = 'Vote for the TRUTH!';
+        
+        const container = document.getElementById('options-container');
+        container.innerHTML = options
+          .filter(opt => opt.author !== socket.id)
+          .map((opt) => {
+            const actualIdx = options.findIndex(o => o.text === opt.text && o.author === opt.author);
+            return `<button class="option-btn" onclick="submitVote(${actualIdx})">${opt.text}</button>`;
+          }).join('');
+      } else {
+        playThinkingMusic(false, activeRoundNumber === 6);
+        playTickSound();
+        document.getElementById('host-status').innerText = 'Voting in progress on phones...';
+      }
+    });
+
+    function submitVote(idx) {
+      if (isPaused) return;
+      socket.emit('submitVote', { roomCode: currentRoom, optionIndex: idx });
+      document.getElementById('vote-form').classList.add('hidden');
+      document.getElementById('player-status').innerText = 'Vote recorded! Look at the main screen.';
+    }
+
+    socket.on('showReveal', ({ truth, players, currentRound, isGameOver }) => {
+      currentUrgentState = false;
+      isPaused = false;
+      myPausedByMe = false;
+      document.body.classList.remove('urgent-timer');
+
+      const hostPause = document.getElementById('host-pause-btn');
+      const playerPause = document.getElementById('player-pause-btn');
+      hostPause.classList.remove('hidden');
+      playerPause.classList.remove('hidden');
+      hostPause.style.opacity = '1';
+      hostPause.style.pointerEvents = 'auto';
+      playerPause.style.opacity = '1';
+      playerPause.style.pointerEvents = 'auto';
+      hostPause.innerText = '⏸ Pause';
+      playerPause.innerText = '⏸ Pause';
+
+      if (isHost) {
+        stopMusic();
+        playRoundRevealSound(currentRound);
+
+        if (isGameOver) {
+          currentPhase = 'GAMEOVER';
+          setTimeout(() => {
+            playGrandFinaleSound();
+            playChillTheme();
+          }, 1200);
         }
 
-        socket.on('roomCreated', ({ roomCode }) => {
-            currentRoomCode = roomCode;
-            document.getElementById('display-room-code').innerText = 'Room: ' + roomCode;
-            document.getElementById('host-controls').classList.remove('hidden');
-            document.getElementById('lobby-screen').classList.add('hidden');
-            document.getElementById('room-screen').classList.remove('hidden');
-        });
+        document.getElementById('host-status').innerText = '';
+        const revealDiv = document.getElementById('host-reveal');
+        revealDiv.classList.remove('hidden');
+        
+        const nextBtn = document.getElementById('next-btn');
+        nextBtn.classList.remove('hidden');
+        nextBtn.innerText = isGameOver ? 'Play Again' : 'Next Round';
 
-        function joinRoom() {
-            const code = document.getElementById('room-code-input').value.toUpperCase();
-            const name = document.getElementById('player-name-input').value;
-            if (!code || !name) {
-                alert('Please enter both room code and your name.');
-                return;
-            }
-            currentRoomCode = code;
-            socket.emit('joinRoom', { roomCode: code, name: name });
-        }
+        let leaderboard = Object.values(players)
+          .sort((a, b) => b.score - a.score)
+          .map(p => `<li><strong>${p.name}:</strong> ${p.score} pts</li>`)
+          .join('');
 
-        socket.on('joinedSuccess', ({ roomCode }) => {
-            document.getElementById('display-room-code').innerText = 'Room: ' + roomCode;
-            document.getElementById('waiting-msg').classList.remove('hidden');
-            document.getElementById('host-controls').classList.remove('hidden');
-            document.getElementById('lobby-screen').classList.add('hidden');
-            document.getElementById('room-screen').classList.remove('hidden');
-        });
+        revealDiv.innerHTML = `
+          <h2 style="color: #00ff88; margin-bottom: 15px;">The Truth: <span style="font-size: 1.5rem; font-weight: bold; color: #00e5ff; text-shadow: 0 0 10px rgba(0,229,255,0.6); display: inline-block; margin-top: 5px;">${truth}</span></h2>
+          <h3>Leaderboard:</h3>
+          <ul>${leaderboard}</ul>
+        `;
+      } else {
+        document.getElementById('vote-form').classList.add('hidden');
+        document.getElementById('player-status').innerHTML = `The Truth: <br><span style="font-size: 1.3rem; font-weight: bold; color: #00e5ff; text-shadow: 0 0 10px rgba(0,229,255,0.6); display: inline-block; margin-top: 5px;">${truth}</span>`;
+        document.getElementById('player-reveal-actions').classList.remove('hidden');
+        const nextBtnText = isGameOver ? 'Play Again' : 'Continue to Next Round';
+        document.getElementById('player-next-btn').innerText = nextBtnText;
 
-        socket.on('updatePlayers', (players) => {
-            const list = document.getElementById('players-list');
-            list.innerHTML = '';
-            players.forEach(p => {
-                const li = document.createElement('li');
-                li.innerText = p.name + (p.score ? ` (${p.score} pts)` : '');
-                li.style.margin = '8px 0';
-                list.appendChild(li);
-            });
-        });
+        let timeLeft = 10;
+        const timerEl = document.getElementById('auto-continue-timer');
+        timerEl.innerText = `Auto-continuing in ${timeLeft}s...`;
+        
+        if (revealCountdown) clearInterval(revealCountdown);
+        revealCountdown = setInterval(() => {
+          if (isPaused) return;
+          timeLeft--;
+          if (timeLeft > 0) {
+            timerEl.innerText = `Auto-continuing in ${timeLeft}s...`;
+          } else {
+            clearInterval(revealCountdown);
+            revealCountdown = null;
+          }
+        }, 1000);
+      }
+    });
 
-        function startRound() {
-            socket.emit('startRound', currentRoomCode);
-        }
-
-        socket.on('newRound', ({ question, currentRound }) => {
-            document.getElementById('round-title').innerText = 'Round ' + currentRound;
-            document.getElementById('question-prompt').innerText = question;
-            document.getElementById('lie-input').value = '';
-            document.getElementById('room-screen').classList.add('hidden');
-            document.getElementById('reveal-screen').classList.add('hidden');
-            document.getElementById('submit-screen').classList.remove('hidden');
-        });
-
-        function submitLie() {
-            const lie = document.getElementById('lie-input').value;
-            if (!lie) {
-                alert('Please type a lie!');
-                return;
-            }
-            socket.emit('submitLie', { roomCode: currentRoomCode, lie: lie });
-            document.getElementById('submit-screen').innerHTML = '<h2 style="color: #e50914;">Lie submitted!</h2><p>Waiting for other players...</p>';
-        }
-
-        socket.on('startVoting', ({ options }) => {
-            const container = document.getElementById('voting-options');
-            container.innerHTML = '';
-            options.forEach((opt, index) => {
-                const btn = document.createElement('button');
-                btn.innerText = opt.text;
-                btn.style.display = 'block';
-                btn.style.width = '100%';
-                btn.style.margin = '10px 0';
-                btn.onclick = () => submitVote(index);
-                container.appendChild(btn);
-            });
-            document.getElementById('submit-screen').classList.add('hidden');
-            document.getElementById('voting-screen').classList.remove('hidden');
-        });
-
-        function submitVote(optionIndex) {
-            socket.emit('submitVote', { roomCode: currentRoomCode, optionIndex: optionIndex });
-            document.getElementById('voting-screen').innerHTML = '<h2 style="color: #e50914;">Vote submitted!</h2><p>Waiting for round results...</p>';
-        }
-
-        socket.on('showReveal', ({ truth, players }) => {
-            document.getElementById('reveal-truth').innerText = truth;
-            const scoreDiv = document.getElementById('reveal-scores');
-            scoreDiv.innerHTML = '<h3 style="color: #fff;">Scores:</h3>';
-            Object.values(players).forEach(p => {
-                scoreDiv.innerHTML += `<p style="font-size: 18px; color: #b0b0b0;">${p.name}: <strong style="color: #e50914;">${p.score || 0}</strong> points</p>`;
-            });
-            document.getElementById('voting-screen').classList.add('hidden');
-            document.getElementById('reveal-screen').classList.remove('hidden');
-        });
-
-        socket.on('timerUpdate', ({ timeLeft }) => {
-            const el = document.getElementById('timer-display');
-            if (el) el.innerText = 'Time Left: ' + timeLeft + 's';
-        });
-
-        socket.on('errorMsg', (msg) => {
-            alert(msg);
-        });
-    </script>
+    socket.on('errorMsg', (msg) => alert(msg));
+  </script>
 </body>
 </html>
