@@ -8,36 +8,35 @@
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: #0f1016; 
-            color: #f0f0f5; 
+            background: #121212; 
+            color: #ffffff; 
             text-align: center; 
             margin: 0; 
             padding: 40px 20px; 
         }
         .hidden { display: none !important; }
         button { 
-            background: linear-gradient(135deg, #ffcc00, #ff9900); 
+            background: #e50914; 
             border: none; 
             padding: 14px 28px; 
             font-size: 18px; 
             font-weight: bold; 
-            color: #121212;
+            color: #ffffff;
             cursor: pointer; 
-            border-radius: 10px; 
+            border-radius: 8px; 
             margin: 12px; 
-            box-shadow: 0 4px 10px rgba(255, 170, 0, 0.3);
-            transition: transform 0.1s ease, background 0.2s ease;
+            transition: background 0.2s ease, transform 0.1s ease;
         }
         button:hover { 
-            background: linear-gradient(135deg, #ffdb4d, #ffaa1a);
+            background: #f40612;
             transform: scale(1.02);
         }
         input { 
             padding: 14px; 
             font-size: 16px; 
-            border-radius: 8px; 
+            border-radius: 6px; 
             border: 2px solid #333; 
-            background: #1a1b24;
+            background: #1e1e1e;
             color: #fff;
             width: 80%; 
             max-width: 320px; 
@@ -46,24 +45,24 @@
             text-align: center;
         }
         input:focus {
-            border-color: #ffcc00;
+            border-color: #e50914;
         }
         .card { 
-            background: #181922; 
+            background: #1a1a1a; 
             padding: 40px 30px; 
-            border-radius: 16px; 
+            border-radius: 12px; 
             display: inline-block; 
-            box-shadow: 0 8px 30px rgba(0,0,0,0.7); 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.8); 
             max-width: 500px; 
             width: 100%; 
-            border: 1px solid #2a2b38;
+            border: 1px solid #333;
         }
         h1 {
-            color: #ffcc00;
+            color: #e50914;
             margin-bottom: 5px;
         }
         p {
-            color: #a0a0b0;
+            color: #b0b0b0;
         }
     </style>
 </head>
@@ -87,7 +86,7 @@
 
         <!-- WAITING ROOM / HOST SCREEN -->
         <div id="room-screen" class="card hidden">
-            <h2 id="display-room-code" style="color: #ffcc00;">Room: </h2>
+            <h2 id="display-room-code" style="color: #e50914;">Room: </h2>
             <h3>Players in Room:</h3>
             <ul id="players-list" style="list-style: none; padding: 0; font-size: 18px;"></ul>
             <div id="host-controls" class="hidden">
@@ -98,25 +97,25 @@
 
         <!-- SUBMITTING LIE SCREEN -->
         <div id="submit-screen" class="card hidden">
-            <h2 id="round-title" style="color: #ffcc00;">Round 1</h2>
+            <h2 id="round-title" style="color: #e50914;">Round 1</h2>
             <p id="question-prompt" style="font-size: 20px; font-weight: bold; color: #fff;"></p>
             <p>Type a believable lie so other players vote for it!</p>
             <input type="text" id="lie-input" placeholder="Your fake answer..." maxlength="30">
             <br>
             <button onclick="submitLie()">Submit Lie</button>
-            <p id="timer-display" style="font-size: 18px; font-weight: bold; color: #ff9900;">Time Left: 45s</p>
+            <p id="timer-display" style="font-size: 18px; font-weight: bold; color: #e50914;">Time Left: 45s</p>
         </div>
 
         <!-- VOTING SCREEN -->
         <div id="voting-screen" class="card hidden">
-            <h2 style="color: #ffcc00;">Vote for the Truth!</h2>
+            <h2 style="color: #e50914;">Vote for the Truth!</h2>
             <div id="voting-options"></div>
-            <p id="vote-timer-display" style="font-size: 18px; font-weight: bold; color: #ff9900;">Time Left: 45s</p>
+            <p id="vote-timer-display" style="font-size: 18px; font-weight: bold; color: #e50914;">Time Left: 45s</p>
         </div>
 
         <!-- REVEAL SCREEN -->
         <div id="reveal-screen" class="card hidden">
-            <h2 style="color: #ffcc00;">Round Results</h2>
+            <h2 style="color: #e50914;">Round Results</h2>
             <p>The real truth was:</p>
             <h3 id="reveal-truth" style="font-size: 24px; color: #4CAF50;"></h3>
             <div id="reveal-scores"></div>
@@ -191,7 +190,7 @@
                 return;
             }
             socket.emit('submitLie', { roomCode: currentRoomCode, lie: lie });
-            document.getElementById('submit-screen').innerHTML = '<h2 style="color: #ffcc00;">Lie submitted!</h2><p>Waiting for other players...</p>';
+            document.getElementById('submit-screen').innerHTML = '<h2 style="color: #e50914;">Lie submitted!</h2><p>Waiting for other players...</p>';
         }
 
         socket.on('startVoting', ({ options }) => {
@@ -212,7 +211,7 @@
 
         function submitVote(optionIndex) {
             socket.emit('submitVote', { roomCode: currentRoomCode, optionIndex: optionIndex });
-            document.getElementById('voting-screen').innerHTML = '<h2 style="color: #ffcc00;">Vote submitted!</h2><p>Waiting for round results...</p>';
+            document.getElementById('voting-screen').innerHTML = '<h2 style="color: #e50914;">Vote submitted!</h2><p>Waiting for round results...</p>';
         }
 
         socket.on('showReveal', ({ truth, players }) => {
@@ -220,7 +219,7 @@
             const scoreDiv = document.getElementById('reveal-scores');
             scoreDiv.innerHTML = '<h3 style="color: #fff;">Scores:</h3>';
             Object.values(players).forEach(p => {
-                scoreDiv.innerHTML += `<p style="font-size: 18px; color: #a0a0b0;">${p.name}: <strong style="color: #ffcc00;">${p.score || 0}</strong> points</p>`;
+                scoreDiv.innerHTML += `<p style="font-size: 18px; color: #b0b0b0;">${p.name}: <strong style="color: #e50914;">${p.score || 0}</strong> points</p>`;
             });
             document.getElementById('voting-screen').classList.add('hidden');
             document.getElementById('reveal-screen').classList.remove('hidden');
