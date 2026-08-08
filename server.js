@@ -245,4 +245,3 @@ function resolveRound(roomCode) {
 server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
-```[cite: 10, 11, 12]
