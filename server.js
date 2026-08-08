@@ -192,12 +192,17 @@ function triggerRevealPhase(room, cleanCode) {
     isGameOver: room.currentRound >= 6
   });
 
-  // 10-second automatic transition timer
-  room.autoNextTimer = setTimeout(() => {
-    if (room.state === 'REVEML' || room.state === 'REVEAL') {
+  // 10-second automatic transition timer (respects pause state)
+  function runAutoNext() {
+    if (room.isPaused) {
+      room.autoNextTimer = setTimeout(runAutoNext, 1000);
+      return;
+    }
+    if (room.state === 'REVEAL') {
       startRoundForRoom(cleanCode, room);
     }
-  }, 10000);
+  }
+  room.autoNextTimer = setTimeout(runAutoNext, 10000);
 }
 
 async function startRoundForRoom(cleanCode, room) {
@@ -272,7 +277,7 @@ io.on('connection', (socket) => {
   socket.on('togglePause', ({ roomCode }) => {
     const cleanCode = roomCode ? roomCode.trim().toUpperCase() : '';
     const room = rooms[cleanCode];
-    if (!room) return;
+    if (!room || room.state === 'SUBMITTING' || room.state === 'VOTING') return;
     room.isPaused = !room.isPaused;
     io.to(cleanCode).emit('pauseStateChanged', { paused: room.isPaused });
   });
@@ -281,6 +286,8 @@ io.on('connection', (socket) => {
     const cleanCode = roomCode ? roomCode.trim().toUpperCase() : '';
     const room = rooms[cleanCode];
     if (!room) return;
+    room.isPaused = false;
+    io.to(cleanCode).emit('pauseStateChanged', { paused: false });
     await startRoundForRoom(cleanCode, room);
   });
 

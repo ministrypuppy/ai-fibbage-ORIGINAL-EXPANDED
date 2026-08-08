@@ -59,7 +59,7 @@
   </div>
 
   <div id="view-host" class="card hidden">
-    <div class="pause-btn" onclick="togglePause(event)" id="host-pause-btn">⏸ Pause</div>
+    <div class="pause-btn hidden" onclick="togglePause(event)" id="host-pause-btn">⏸ Pause</div>
     <div class="audio-controls" onclick="toggleMute(event)" id="mute-btn">🔊 Audio: ON</div>
     <h1>HOST SCREEN</h1>
     <div id="host-lobby">
@@ -82,7 +82,7 @@
   </div>
 
   <div id="view-player" class="card hidden">
-    <div class="pause-btn" onclick="togglePause(event)" id="player-pause-btn">⏸ Pause</div>
+    <div class="pause-btn hidden" onclick="togglePause(event)" id="player-pause-btn">⏸ Pause</div>
     <div id="player-join">
       <h1>JOIN GAME</h1>
       <input type="text" id="join-code" placeholder="4-Letter Room Code" style="text-transform: uppercase;">
@@ -277,9 +277,6 @@
       const label = paused ? '▶ Resume' : '⏸ Pause';
       document.getElementById('host-pause-btn').innerText = label;
       document.getElementById('player-pause-btn').innerText = label;
-      if (paused) {
-        alert("Game is Paused");
-      }
     });
 
     function hideAll() {
@@ -360,6 +357,10 @@
       currentUrgentState = false;
       document.body.classList.remove('urgent-timer');
 
+      // Hide pause buttons during submitting / voting portions
+      document.getElementById('host-pause-btn').classList.add('hidden');
+      document.getElementById('player-pause-btn').classList.add('hidden');
+
       const roundLabel = currentRound === 6 ? 'FINAL FIBBAGE (3x Points!)' : `Round ${currentRound}/6 (${multiplier}x Points)`;
 
       if (isHost) {
@@ -420,6 +421,10 @@
       currentUrgentState = false;
       document.body.classList.remove('urgent-timer');
 
+      // Hide pause buttons during voting portion as well
+      document.getElementById('host-pause-btn').classList.add('hidden');
+      document.getElementById('player-pause-btn').classList.add('hidden');
+
       if (!isHost) {
         document.getElementById('lie-form').classList.add('hidden');
         document.getElementById('vote-form').classList.remove('hidden');
@@ -448,6 +453,10 @@
     socket.on('showReveal', ({ truth, players, currentRound, isGameOver }) => {
       currentUrgentState = false;
       document.body.classList.remove('urgent-timer');
+
+      // Show pause buttons between rounds (during reveal/standby phase)
+      document.getElementById('host-pause-btn').classList.remove('hidden');
+      document.getElementById('player-pause-btn').classList.remove('hidden');
 
       if (isHost) {
         stopMusic();
