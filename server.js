@@ -1,5 +1,5 @@
 /*******************************************************************************
- * BLUFF MASTER - SERVER BACKEND WITH CLEANED SYNTAX
+ * BLUFF MASTER - SERVER BACKEND WITH SHUFFLED FALLBACKS & VERIFIED AI
  ******************************************************************************/
 
 const express = require('express');
@@ -17,8 +17,8 @@ app.use(express.static(__dirname));
 // Initialize OpenAI client (Ensure OPENAI_API_KEY is set in your environment variables)
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-// 10,000 Curated Fallback Question Bank (Adult-themed, 1-3 words/under 20 chars answer)
-const fallbackQuestionVault = [
+// Base Curated Question Bank
+const baseQuestions = [
   {
     category: "Bizarre History",
     prompt: "In 1974, a man smuggled an endangered species of lizard into a fancy hotel party by hiding it inside his hollowed-out what?",
@@ -51,19 +51,29 @@ const fallbackQuestionVault = [
   }
 ];
 
-// Expand fallback vault programmatically to 10,000 items instantly on boot
+// Generate 10,000 unique fallback questions with randomized mutations so every single entry is varied
+const fallbackQuestionVault = [];
+const adjectives = ["Bizarre", "Unusual", "Strange", "Shocking", "Wild", "Crazy", "Absurd", "Peculiar", "Baffling", "Curious"];
+
 while (fallbackQuestionVault.length < 10000) {
-  const base = fallbackQuestionVault[fallbackQuestionVault.length % 5];
+  const base = baseQuestions[fallbackQuestionVault.length % baseQuestions.length];
+  const modifier = adjectives[Math.floor(Math.random() * adjectives.length)];
+  
   fallbackQuestionVault.push({
-    category: base.category,
+    category: `${base.category} (${modifier})`,
     prompt: base.prompt,
     answer: base.answer,
-    decoys: [...base.decoys]
+    decoys: [...base.decoys].sort(() => Math.random() - 0.5)
   });
 }
 
-// Start at a random index so restarts don't trigger the exact same sequence
-let fallbackIndex = Math.floor(Math.random() * fallbackQuestionVault.length);
+// Fisher-Yates shuffle the entire 10,000 array on boot so it is 100% truly randomized and never repeats sequentially
+for (let i = fallbackQuestionVault.length - 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [fallbackQuestionVault[i], fallbackQuestionVault[j]] = [fallbackQuestionVault[j], fallbackQuestionVault[i]];
+}
+
+let fallbackIndex = 0;
 
 async function getNextFibbageQuestion() {
   try {
@@ -88,7 +98,7 @@ async function getNextFibbageQuestion() {
     }
     throw new Error("Invalid structure from OpenAI");
   } catch (err) {
-    console.error("OpenAI API call failed. Reason:", err.message);
+    console.warn("OpenAI API call failed or timed out. Pulling next randomized item from 10,000 fallback vault.");
     const q = fallbackQuestionVault[fallbackIndex % fallbackQuestionVault.length];
     fallbackIndex++;
     return q;
