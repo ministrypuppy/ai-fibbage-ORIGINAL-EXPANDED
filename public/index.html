@@ -538,13 +538,13 @@
           .join('');
 
         revealDiv.innerHTML = `
-          <h2 style="color: #00ff88; margin-bottom: 10px;">The Truth: ${truth}</h2>
+          <h2 style="color: #00ff88; margin-bottom: 15px;">The Truth: <span style="font-size: 1.5rem; font-weight: bold; color: #00e5ff; text-shadow: 0 0 10px rgba(0,229,255,0.6); display: inline-block; margin-top: 5px;">${truth}</span></h2>
           <h3>Leaderboard:</h3>
           <ul>${leaderboard}</ul>
         `;
       } else {
         document.getElementById('vote-form').classList.add('hidden');
-        document.getElementById('player-status').innerText = `Reveal! The Truth was: ${truth}`;
+        document.getElementById('player-status').innerHTML = `The Truth: <br><span style="font-size: 1.3rem; font-weight: bold; color: #00e5ff; text-shadow: 0 0 10px rgba(0,229,255,0.6); display: inline-block; margin-top: 5px;">${truth}</span>`;
         document.getElementById('player-reveal-actions').classList.remove('hidden');
         const nextBtnText = isGameOver ? 'Play Again' : 'Continue to Next Round';
         document.getElementById('player-next-btn').innerText = nextBtnText;
