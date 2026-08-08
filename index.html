@@ -6,12 +6,65 @@
     <title>Bluff Master</title>
     <script src="/socket.io/socket.io.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; background: #121212; color: #fff; text-align: center; margin: 0; padding: 20px; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: #0f1016; 
+            color: #f0f0f5; 
+            text-align: center; 
+            margin: 0; 
+            padding: 40px 20px; 
+        }
         .hidden { display: none !important; }
-        button { background: #ffcc00; border: none; padding: 12px 24px; font-size: 18px; font-weight: bold; cursor: pointer; border-radius: 8px; margin: 10px; }
-        button:hover { background: #e6b800; }
-        input { padding: 12px; font-size: 16px; border-radius: 6px; border: 1px solid #ccc; width: 80%; max-width: 300px; margin: 10px; }
-        .card { background: #1e1e1e; padding: 20px; border-radius: 12px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.5); max-width: 500px; width: 100%; }
+        button { 
+            background: linear-gradient(135deg, #ffcc00, #ff9900); 
+            border: none; 
+            padding: 14px 28px; 
+            font-size: 18px; 
+            font-weight: bold; 
+            color: #121212;
+            cursor: pointer; 
+            border-radius: 10px; 
+            margin: 12px; 
+            box-shadow: 0 4px 10px rgba(255, 170, 0, 0.3);
+            transition: transform 0.1s ease, background 0.2s ease;
+        }
+        button:hover { 
+            background: linear-gradient(135deg, #ffdb4d, #ffaa1a);
+            transform: scale(1.02);
+        }
+        input { 
+            padding: 14px; 
+            font-size: 16px; 
+            border-radius: 8px; 
+            border: 2px solid #333; 
+            background: #1a1b24;
+            color: #fff;
+            width: 80%; 
+            max-width: 320px; 
+            margin: 10px; 
+            outline: none;
+            text-align: center;
+        }
+        input:focus {
+            border-color: #ffcc00;
+        }
+        .card { 
+            background: #181922; 
+            padding: 40px 30px; 
+            border-radius: 16px; 
+            display: inline-block; 
+            box-shadow: 0 8px 30px rgba(0,0,0,0.7); 
+            max-width: 500px; 
+            width: 100%; 
+            border: 1px solid #2a2b38;
+        }
+        h1 {
+            color: #ffcc00;
+            margin-bottom: 5px;
+        }
+        p {
+            color: #a0a0b0;
+        }
     </style>
 </head>
 <body>
@@ -24,7 +77,7 @@
             <div id="menu-options">
                 <button onclick="showCreateRoom()">Create Room</button>
                 <br>
-                <input type="text" id="room-code-input" placeholder="Room Code (e.g. ABCD)" maxlength="4" style="text-transform: uppercase;">
+                <input type="text" id="room-code-input" placeholder="ROOM CODE (E.G. ABCD)" maxlength="4" style="text-transform: uppercase;">
                 <br>
                 <input type="text" id="player-name-input" placeholder="Your Name" maxlength="15">
                 <br>
@@ -34,9 +87,9 @@
 
         <!-- WAITING ROOM / HOST SCREEN -->
         <div id="room-screen" class="card hidden">
-            <h2 id="display-room-code">Room: </h2>
+            <h2 id="display-room-code" style="color: #ffcc00;">Room: </h2>
             <h3>Players in Room:</h3>
-            <ul id="players-list" style="list-style: none; padding: 0;"></ul>
+            <ul id="players-list" style="list-style: none; padding: 0; font-size: 18px;"></ul>
             <div id="host-controls" class="hidden">
                 <button onclick="startRound()">Start Game / Next Round</button>
             </div>
@@ -45,27 +98,27 @@
 
         <!-- SUBMITTING LIE SCREEN -->
         <div id="submit-screen" class="card hidden">
-            <h2 id="round-title">Round 1</h2>
-            <p id="question-prompt" style="font-size: 20px; font-weight: bold;"></p>
+            <h2 id="round-title" style="color: #ffcc00;">Round 1</h2>
+            <p id="question-prompt" style="font-size: 20px; font-weight: bold; color: #fff;"></p>
             <p>Type a believable lie so other players vote for it!</p>
             <input type="text" id="lie-input" placeholder="Your fake answer..." maxlength="30">
             <br>
             <button onclick="submitLie()">Submit Lie</button>
-            <p id="timer-display">Time Left: 45s</p>
+            <p id="timer-display" style="font-size: 18px; font-weight: bold; color: #ff9900;">Time Left: 45s</p>
         </div>
 
         <!-- VOTING SCREEN -->
         <div id="voting-screen" class="card hidden">
-            <h2>Vote for the Truth!</h2>
+            <h2 style="color: #ffcc00;">Vote for the Truth!</h2>
             <div id="voting-options"></div>
-            <p id="vote-timer-display">Time Left: 45s</p>
+            <p id="vote-timer-display" style="font-size: 18px; font-weight: bold; color: #ff9900;">Time Left: 45s</p>
         </div>
 
         <!-- REVEAL SCREEN -->
         <div id="reveal-screen" class="card hidden">
-            <h2>Round Results</h2>
+            <h2 style="color: #ffcc00;">Round Results</h2>
             <p>The real truth was:</p>
-            <h3 id="reveal-truth" style="color: #4CAF50;"></h3>
+            <h3 id="reveal-truth" style="font-size: 24px; color: #4CAF50;"></h3>
             <div id="reveal-scores"></div>
             <br>
             <button onclick="startRound()">Continue to Next Round</button>
@@ -102,7 +155,6 @@
         socket.on('joinedSuccess', ({ roomCode }) => {
             document.getElementById('display-room-code').innerText = 'Room: ' + roomCode;
             document.getElementById('waiting-msg').classList.remove('hidden');
-            // Allow players to also trigger round starts if needed
             document.getElementById('host-controls').classList.remove('hidden');
             document.getElementById('lobby-screen').classList.add('hidden');
             document.getElementById('room-screen').classList.remove('hidden');
@@ -114,6 +166,7 @@
             players.forEach(p => {
                 const li = document.createElement('li');
                 li.innerText = p.name + (p.score ? ` (${p.score} pts)` : '');
+                li.style.margin = '8px 0';
                 list.appendChild(li);
             });
         });
@@ -138,7 +191,7 @@
                 return;
             }
             socket.emit('submitLie', { roomCode: currentRoomCode, lie: lie });
-            document.getElementById('submit-screen').innerHTML = '<h2>Lie submitted! Waiting for other players...</h2>';
+            document.getElementById('submit-screen').innerHTML = '<h2 style="color: #ffcc00;">Lie submitted!</h2><p>Waiting for other players...</p>';
         }
 
         socket.on('startVoting', ({ options }) => {
@@ -159,15 +212,15 @@
 
         function submitVote(optionIndex) {
             socket.emit('submitVote', { roomCode: currentRoomCode, optionIndex: optionIndex });
-            document.getElementById('voting-screen').innerHTML = '<h2>Vote submitted! Waiting for round results...</h2>';
+            document.getElementById('voting-screen').innerHTML = '<h2 style="color: #ffcc00;">Vote submitted!</h2><p>Waiting for round results...</p>';
         }
 
         socket.on('showReveal', ({ truth, players }) => {
             document.getElementById('reveal-truth').innerText = truth;
             const scoreDiv = document.getElementById('reveal-scores');
-            scoreDiv.innerHTML = '<h3>Scores:</h3>';
+            scoreDiv.innerHTML = '<h3 style="color: #fff;">Scores:</h3>';
             Object.values(players).forEach(p => {
-                scoreDiv.innerHTML += `<p>${p.name}: ${p.score || 0} points</p>`;
+                scoreDiv.innerHTML += `<p style="font-size: 18px; color: #a0a0b0;">${p.name}: <strong style="color: #ffcc00;">${p.score || 0}</strong> points</p>`;
             });
             document.getElementById('voting-screen').classList.add('hidden');
             document.getElementById('reveal-screen').classList.remove('hidden');
