@@ -58,7 +58,7 @@ const partyTrivia = [
 ];
 
 function generateRoomCode() {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   let code = '';
   for (let i = 0; i < 4; i++) {
     code += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -192,7 +192,10 @@ function triggerRevealPhase(room, cleanCode) {
 
 io.on('connection', (socket) => {
   socket.on('createRoom', () => {
-    const code = generateRoomCode();
+    let code = generateRoomCode();
+    while (rooms[code]) {
+      code = generateRoomCode();
+    }
     rooms[code] = {
       hostId: socket.id,
       players: {},
