@@ -58,10 +58,10 @@
     <button onclick="showPlayerSetup()">Join Game (Phone)</button>
   </div>
 
-  <div id="view-host" class="card hidden">
-    <div class="pause-btn hidden" onclick="togglePause(event)" id="host-pause-btn">⏸ Pause</div>
-    <div class="audio-controls" onclick="toggleMute(event)" id="mute-btn">🔊 Audio: ON</div>
-    <h1>HOST SCREEN</h1>
+  <div id="view-host" class="card">
+    <div class="pause-btn hidden" onclick="togglePause(event)" id="host-pause-btn" style="top: 15px; left: 15px; right: auto;">⏸ Pause</div>
+    <div class="audio-controls" onclick="toggleMute(event)" id="mute-btn" style="top: 15px; right: 15px; left: auto;">🔊 Audio: ON</div>
+    <h1 style="margin-top: 25px;">HOST SCREEN</h1>
     <div id="host-lobby">
       <p>Join at this URL on your phone!</p>
       <p>ROOM CODE:</p>
@@ -81,16 +81,16 @@
     </div>
   </div>
 
-  <div id="view-player" class="card hidden">
-    <div class="pause-btn hidden" onclick="togglePause(event)" id="player-pause-btn">⏸ Pause</div>
-    <div id="player-join">
+  <div id="view-player" class="card">
+    <div class="pause-btn hidden" onclick="togglePause(event)" id="player-pause-btn" style="top: 15px; left: 15px; right: auto;">⏸ Pause</div>
+    <div id="player-join" style="margin-top: 25px;">
       <h1>JOIN GAME</h1>
       <input type="text" id="join-code" placeholder="4-Letter Room Code" style="text-transform: uppercase;">
       <input type="text" id="join-name" placeholder="Your Name">
       <button onclick="joinRoom()">Join Room</button>
     </div>
 
-    <div id="player-gameplay" class="hidden">
+    <div id="player-gameplay" class="hidden" style="margin-top: 25px;">
       <div id="player-round-badge" class="badge">Round 1/6</div>
       <div class="timer-bar-container"><div id="player-timer-bar" class="timer-bar"></div></div>
       <p id="player-status" style="color: #00e5ff; font-weight: bold; margin-bottom: 15px;"></p>
@@ -220,8 +220,10 @@
 
       let step = 0;
       musicInterval = setInterval(() => {
-        playTone(notes[step % notes.length], type, 0.2, 0, vol);
-        step++;
+        if (!isPaused) {
+          playTone(notes[step % notes.length], type, 0.2, 0, vol);
+          step++;
+        }
       }, tempo);
     }
 
@@ -284,7 +286,6 @@
         const label = '▶ Resume';
         hostBtn.innerText = label;
         playerBtn.innerText = label;
-        // If someone else paused it, disable the button for everyone else so they can't resume
         if (!myPausedByMe) {
           hostBtn.style.opacity = '0.5';
           hostBtn.style.pointerEvents = 'none';
@@ -337,6 +338,8 @@
       currentRoom = roomCode.toUpperCase();
       document.getElementById('room-code-display').innerText = currentRoom;
       updateFooterCode(currentRoom);
+      // Show pause button during lobby so game can be paused before starting if needed
+      document.getElementById('host-pause-btn').classList.remove('hidden');
     });
 
     socket.on('updatePlayers', (players) => {
@@ -383,11 +386,11 @@
       myPausedByMe = false;
       document.body.classList.remove('urgent-timer');
 
-      // Hide pause buttons during submitting / voting portions
+      // Show pause buttons during gameplay/submitting phases
       const hostPause = document.getElementById('host-pause-btn');
       const playerPause = document.getElementById('player-pause-btn');
-      hostPause.classList.add('hidden');
-      playerPause.classList.add('hidden');
+      hostPause.classList.remove('hidden');
+      playerPause.classList.remove('hidden');
       hostPause.style.opacity = '1';
       hostPause.style.pointerEvents = 'auto';
       playerPause.style.opacity = '1';
@@ -419,6 +422,7 @@
     });
 
     function startRound() {
+      if (isPaused) return;
       socket.emit('startRound', currentRoom);
     }
 
@@ -438,6 +442,8 @@
       document.getElementById('player-gameplay').classList.remove('hidden');
       document.getElementById('player-status').innerText = 'Connected! Waiting for host...';
       document.getElementById('lie-form').classList.add('hidden');
+      // Show pause button for joined player
+      document.getElementById('player-pause-btn').classList.remove('hidden');
     });
 
     function submitLie() {
@@ -455,11 +461,11 @@
       currentUrgentState = false;
       document.body.classList.remove('urgent-timer');
 
-      // Hide pause buttons during voting portion as well
+      // Keep pause buttons visible during voting
       const hostPause = document.getElementById('host-pause-btn');
       const playerPause = document.getElementById('player-pause-btn');
-      hostPause.classList.add('hidden');
-      playerPause.classList.add('hidden');
+      hostPause.classList.remove('hidden');
+      playerPause.classList.remove('hidden');
       hostPause.style.opacity = '1';
       hostPause.style.pointerEvents = 'auto';
       playerPause.style.opacity = '1';
@@ -499,7 +505,6 @@
       myPausedByMe = false;
       document.body.classList.remove('urgent-timer');
 
-      // Show pause buttons between rounds (during reveal/standby phase)
       const hostPause = document.getElementById('host-pause-btn');
       const playerPause = document.getElementById('player-pause-btn');
       hostPause.classList.remove('hidden');
@@ -554,7 +559,7 @@
         
         if (revealCountdown) clearInterval(revealCountdown);
         revealCountdown = setInterval(() => {
-          if (isPaused) return; // Freeze auto-continue timer when paused
+          if (isPaused) return;
           timeLeft--;
           if (timeLeft > 0) {
             timerEl.innerText = `Auto-continuing in ${timeLeft}s...`;

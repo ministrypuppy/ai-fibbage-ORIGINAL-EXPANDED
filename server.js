@@ -107,7 +107,7 @@ function startPhaseTimer(room, duration, cleanCode, onTick, onExpire) {
   onTick(room.timeLeft);
 
   room.timer = setInterval(() => {
-    if (room.isPaused) return;
+    if (room.isPaused) return; // Completely stops timer decrementing when paused
     room.timeLeft--;
     onTick(room.timeLeft);
     if (room.timeLeft <= 0) {
@@ -192,7 +192,6 @@ function triggerRevealPhase(room, cleanCode) {
     isGameOver: room.currentRound >= 6
   });
 
-  // 10-second automatic transition timer (respects pause state)
   function runAutoNext() {
     if (room.isPaused) {
       room.autoNextTimer = setTimeout(runAutoNext, 1000);
@@ -280,20 +279,17 @@ io.on('connection', (socket) => {
   socket.on('togglePause', ({ roomCode }) => {
     const cleanCode = roomCode ? roomCode.trim().toUpperCase() : '';
     const room = rooms[cleanCode];
-    // Only allow pausing during REVEAL or LOBBY (not submitting/voting phases)
-    if (!room || (room.state === 'SUBMITTING' || room.state === 'VOTING')) return;
+    if (!room) return;
 
     if (!room.isPaused) {
-      // Pause immediately
       room.isPaused = true;
       room.pausedBy = socket.id;
     } else {
-      // Only the person who paused it can unpause it
       if (room.pausedBy === socket.id) {
         room.isPaused = false;
         room.pausedBy = null;
       } else {
-        return; // Ignore if someone else tries to unpause
+        return;
       }
     }
 
@@ -303,7 +299,7 @@ io.on('connection', (socket) => {
   socket.on('startRound', async (roomCode) => {
     const cleanCode = roomCode ? roomCode.trim().toUpperCase() : '';
     const room = rooms[cleanCode];
-    if (!room || room.isPaused) return; // Prevent next round while paused
+    if (!room || room.isPaused) return;
     room.isPaused = false;
     room.pausedBy = null;
     io.to(cleanCode).emit('pauseStateChanged', { paused: false, pausedBy: null });
