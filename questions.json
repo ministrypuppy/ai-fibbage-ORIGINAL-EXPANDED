@@ -1,0 +1,2102 @@
+[
+  {
+    "id": 1,
+    "prompt": "Pope John XII famously died in 964 AD after suffering a stroke while _______.",
+    "answer": "having sex",
+    "decoys": [
+      "drinking wine",
+      "defecating",
+      "praying"
+    ]
+  },
+  {
+    "id": 2,
+    "prompt": "To treat 'hysteria' in women during the late 19th century, doctors invented a steam-powered device that eventually evolved into the modern _______.",
+    "answer": "vibrator",
+    "decoys": [
+      "hair dryer",
+      "vacuum cleaner",
+      "electric iron"
+    ]
+  },
+  {
+    "id": 3,
+    "prompt": "Due to its high ammonia content, ancient Romans used _______ as a key ingredient in their mouthwash and toothpaste.",
+    "answer": "urine",
+    "decoys": [
+      "goat milk",
+      "sweat",
+      "swamp water"
+    ]
+  },
+  {
+    "id": 4,
+    "prompt": "In 1995, McArthur Wheeler robbed two banks with lemon juice on his face because he believed it made him invisible to security cameras, like _______.",
+    "answer": "invisible ink",
+    "decoys": [
+      "sunscreen",
+      "war paint",
+      "clear glue"
+    ]
+  },
+  {
+    "id": 5,
+    "prompt": "In 2012, a Florida man tragically died of asphyxiation after winning a competitive eating contest involving dozens of live _______.",
+    "answer": "cockroaches",
+    "decoys": [
+      "tarantulas",
+      "earthworms",
+      "live wasps"
+    ]
+  },
+  {
+    "id": 6,
+    "prompt": "In 2011, a German museum ruined an expensive, dirty-looking modern art piece because an overzealous janitor mistakenly _______.",
+    "answer": "scrubbed it",
+    "decoys": [
+      "painted over it",
+      "threw it away",
+      "sat on it"
+    ]
+  },
+  {
+    "id": 7,
+    "prompt": "In 2005, a Swedish adult toy company made headlines by offering a product that allowed customers to insert their deceased partner's _______ into a vibrator.",
+    "answer": "ashes",
+    "decoys": [
+      "teeth",
+      "hair",
+      "pacemaker"
+    ]
+  },
+  {
+    "id": 8,
+    "prompt": "Disappointed by Cambridge's strict ban on pet dogs, the poet Lord Byron famously kept a pet _______ in his college dorm room instead.",
+    "answer": "bear",
+    "decoys": [
+      "peacock",
+      "badger",
+      "monkey"
+    ]
+  },
+  {
+    "id": 9,
+    "prompt": "In 2003, a Dutch scientist won an Ig Nobel Prize for documenting the first scientifically proven case of homosexual necrophilia in a _______.",
+    "answer": "mallard duck",
+    "decoys": [
+      "emperor penguin",
+      "canada goose",
+      "fruit bat"
+    ]
+  },
+  {
+    "id": 10,
+    "prompt": "In 1923, jockey Frank Hayes made history at Belmont Park by winning a horse race despite suffering a fatal _______ mid-race.",
+    "answer": "heart attack",
+    "decoys": [
+      "brain aneurysm",
+      "seizure",
+      "panic attack"
+    ]
+  },
+  {
+    "id": 11,
+    "prompt": "To deter grave robbers in the 19th century, some people installed explosive 'torpedoes' inside their ________.",
+    "answer": "coffins",
+    "decoys": [
+      "tombs",
+      "shrouds",
+      "tuxedos"
+    ]
+  },
+  {
+    "id": 12,
+    "prompt": "In ancient Rome, wealthy women purchased the sweat of ________ to use as a facial moisturizer.",
+    "answer": "gladiators",
+    "decoys": [
+      "senators",
+      "stallions",
+      "executioners"
+    ]
+  },
+  {
+    "id": 13,
+    "prompt": "Before toilet paper was invented, ancient Romans wiped themselves in public restrooms using a wet sponge attached to a ________.",
+    "answer": "stick",
+    "decoys": [
+      "rope",
+      "spear",
+      "chain"
+    ]
+  },
+  {
+    "id": 14,
+    "prompt": "In 1923, jockey Frank Hayes won a race at Belmont Park despite being ________ for the majority of the ride.",
+    "answer": "dead",
+    "decoys": [
+      "asleep",
+      "blind",
+      "drunk"
+    ]
+  },
+  {
+    "id": 15,
+    "prompt": "In Victorian England, wealthy socialites would frequently host parties dedicated solely to unwrapping ________.",
+    "answer": "mummies",
+    "decoys": [
+      "corpses",
+      "presents",
+      "paintings"
+    ]
+  },
+  {
+    "id": 16,
+    "prompt": "In 1996, a Swedish man was arrested at an airport for trying to smuggle 65 live baby ________ in his pants.",
+    "answer": "snakes",
+    "decoys": [
+      "crabs",
+      "hamsters",
+      "eels"
+    ]
+  },
+  {
+    "id": 17,
+    "prompt": "In the 18th century, some European doctors believed blowing ________ up a patient's rectum could revive them from drowning.",
+    "answer": "tobacco smoke",
+    "decoys": [
+      "hot air",
+      "whiskey",
+      "hot vinegar"
+    ]
+  },
+  {
+    "id": 18,
+    "prompt": "In 1995, a man successfully robbed two banks with lemon juice on his face because he believed it made him ________.",
+    "answer": "invisible",
+    "decoys": [
+      "unrecognizable",
+      "blurry",
+      "invincible"
+    ]
+  },
+  {
+    "id": 19,
+    "prompt": "In the late 19th century, Bayer marketed a new cough suppressant for children that was actually ________.",
+    "answer": "heroin",
+    "decoys": [
+      "cocaine",
+      "arsenic",
+      "whiskey"
+    ]
+  },
+  {
+    "id": 20,
+    "prompt": "According to a 2015 study, men who frequently post selfies are statistically more likely to show signs of ________.",
+    "answer": "psychopathy",
+    "decoys": [
+      "narcissism",
+      "kleptomania",
+      "sadism"
+    ]
+  },
+  {
+    "id": 21,
+    "prompt": "In 16th-century France, a woman could legally sue her husband for divorce if he was unable to ______ in front of a court-appointed jury.",
+    "answer": "get an erection",
+    "decoys": [
+      "prove his love",
+      "read the Bible",
+      "recite his vows"
+    ]
+  },
+  {
+    "id": 22,
+    "prompt": "In Victorian England, doctors used a foot-pedal-powered device called the 'Manipulator' to cure women of 'hysteria' by giving them ______.",
+    "answer": "orgasms",
+    "decoys": [
+      "electric shocks",
+      "ice baths",
+      "herbal enemas"
+    ]
+  },
+  {
+    "id": 23,
+    "prompt": "In 1995, a man successfully robbed two banks after coating his face in lemon juice, falsely believing it made him ______ to security cameras.",
+    "answer": "invisible",
+    "decoys": [
+      "blurry",
+      "unrecognizable",
+      "look like a lemon"
+    ]
+  },
+  {
+    "id": 24,
+    "prompt": "To prove yellow fever wasn't contagious, 19th-century doctor Stubbins Ffirth rubbed infected ______ into his own open wounds and drank it.",
+    "answer": "vomit",
+    "decoys": [
+      "urine",
+      "pus",
+      "sweat"
+    ]
+  },
+  {
+    "id": 25,
+    "prompt": "Before his death, legendary gonzo journalist Hunter S. Thompson requested that his ashes be fired from a massive cannon shaped like a ______.",
+    "answer": "two-thumbed fist",
+    "decoys": [
+      "giant middle finger",
+      "whiskey bottle",
+      "peacock"
+    ]
+  },
+  {
+    "id": 26,
+    "prompt": "When flatworms mate, they engage in 'penis fencing' where the loser of the duel is forced to ______.",
+    "answer": "get pregnant",
+    "decoys": [
+      "be eaten alive",
+      "clean the nest",
+      "change genders"
+    ]
+  },
+  {
+    "id": 27,
+    "prompt": "During the 18th century, wealthy European aristocrats would hire 'garden hermits' to live in backyard caves and pretend to be ______ for entertainment.",
+    "answer": "druids",
+    "decoys": [
+      "cavemen",
+      "trolls",
+      "ghosts"
+    ]
+  },
+  {
+    "id": 28,
+    "prompt": "In 2014, a Florida man made headlines after trying to trade a live, four-foot alligator for a ______ at a local convenience store.",
+    "answer": "case of beer",
+    "decoys": [
+      "pack of cigarettes",
+      "scratch-off ticket",
+      "bag of beef jerky"
+    ]
+  },
+  {
+    "id": 29,
+    "prompt": "In 15th-century Europe, the Catholic Church briefly banned the use of the fork, claiming it was an insult to God because it resembled a ______.",
+    "answer": "devil's pitchfork",
+    "decoys": [
+      "heretic's weapon",
+      "torture device",
+      "sinful hand"
+    ]
+  },
+  {
+    "id": 30,
+    "prompt": "In ancient Rome, wealthy citizens used to rinse their mouths and brush their teeth with ______ to whiten them.",
+    "answer": "urine",
+    "decoys": [
+      "crushed beetles",
+      "goat milk",
+      "vinegar and ash"
+    ]
+  },
+  {
+    "id": 31,
+    "prompt": "In 897 AD, Pope Stephen VI exhumed his predecessor's corpse, dressed it in papal robes, and put it on trial. This bizarre event is known as the _______.",
+    "answer": "Cadaver Synod",
+    "decoys": [
+      "Pope's Revenge",
+      "Dead Pope Trial",
+      "Corpse Court"
+    ]
+  },
+  {
+    "id": 32,
+    "prompt": "In 2004, a woman was arrested at a Swedish airport after security discovered she was trying to smuggle 75 live baby snakes inside her _______.",
+    "answer": "bra",
+    "decoys": [
+      "underwear",
+      "corset",
+      "boots"
+    ]
+  },
+  {
+    "id": 33,
+    "prompt": "King Henry VIII's court had a highly coveted official role called the 'Groom of the Stool,' whose main duty was to _______.",
+    "answer": "wipe his bottom",
+    "decoys": [
+      "empty his toilet",
+      "inspect his stool",
+      "hold his chamberpot"
+    ]
+  },
+  {
+    "id": 34,
+    "prompt": "In Victorian England, many families participated in a morbid trend where they took formal family portraits with their _______.",
+    "answer": "dead relatives",
+    "decoys": [
+      "taxidermied pets",
+      "executioners",
+      "ghost hunters"
+    ]
+  },
+  {
+    "id": 35,
+    "prompt": "In 2001, German cannibal Armin Meiwes posted an online ad looking for a willing volunteer to let Meiwes _______.",
+    "answer": "eat them",
+    "decoys": [
+      "taxidermy them",
+      "embalm them",
+      "dissect them"
+    ]
+  },
+  {
+    "id": 36,
+    "prompt": "In 18th-century England, wealthy landowners would hire people to live in their gardens as 'ornamental _______.'",
+    "answer": "hermits",
+    "decoys": [
+      "gnomes",
+      "statues",
+      "monks"
+    ]
+  },
+  {
+    "id": 37,
+    "prompt": "In 1923, jockey Frank Hayes won a race at Belmont Park despite having suffered a fatal _______ mid-race.",
+    "answer": "heart attack",
+    "decoys": [
+      "stroke",
+      "seizure",
+      "brain aneurysm"
+    ]
+  },
+  {
+    "id": 38,
+    "prompt": "In the 1940s, doctors performed pregnancy tests by injecting a woman's urine into a live _______, which would ovulate within hours if positive.",
+    "answer": "frog",
+    "decoys": [
+      "rabbit",
+      "mouse",
+      "hamster"
+    ]
+  },
+  {
+    "id": 39,
+    "prompt": "In ancient Rome, wealthy women purchased the _______ of gladiators to use as a facial cream and aphrodisiac.",
+    "answer": "sweat",
+    "decoys": [
+      "blood",
+      "semen",
+      "urine"
+    ]
+  },
+  {
+    "id": 40,
+    "prompt": "In 2018, a Florida man was arrested after attempting to pay for his drive-thru McDonald's order with a bag of _______.",
+    "answer": "weed",
+    "decoys": [
+      "alligator teeth",
+      "stolen mail",
+      "meth"
+    ]
+  },
+  {
+    "id": 41,
+    "prompt": "In 2012, a Florida man was arrested after attempting to trade a live alligator to a convenience store clerk in exchange for a ________.",
+    "answer": "pack of beer",
+    "decoys": [
+      "lap dance",
+      "pack of smokes",
+      "box of donuts"
+    ]
+  },
+  {
+    "id": 42,
+    "prompt": "In the 19th century, a popular medical cure for \"hysteria\" in women was pelvic massage, which led to the invention of the ________.",
+    "answer": "vibrator",
+    "decoys": [
+      "vacuum cleaner",
+      "hair dryer",
+      "electric fan"
+    ]
+  },
+  {
+    "id": 43,
+    "prompt": "Pope Gregory IX declared war on ________ in the 13th century, claiming they were instruments of Satan, which ironically helped spread the Black Plague.",
+    "answer": "cats",
+    "decoys": [
+      "lefties",
+      "bathhouses",
+      "tomatoes"
+    ]
+  },
+  {
+    "id": 44,
+    "prompt": "In 2014, a tourist in Germany got trapped inside a giant, 32-ton outdoor sculpture shaped like a ________.",
+    "answer": "vagina",
+    "decoys": [
+      "toilet",
+      "hot dog",
+      "beer mug"
+    ]
+  },
+  {
+    "id": 45,
+    "prompt": "According to a bizarre 19th-century French law, it was illegal to name your pet pig ________.",
+    "answer": "Napoleon",
+    "decoys": [
+      "Jesus",
+      "Louis",
+      "Satan"
+    ]
+  },
+  {
+    "id": 46,
+    "prompt": "Before modern pregnancy tests, doctors in the 1940s would inject a woman's urine into a ________; if it ovulated, the woman was pregnant.",
+    "answer": "frog",
+    "decoys": [
+      "rabbit",
+      "chicken",
+      "hamster"
+    ]
+  },
+  {
+    "id": 47,
+    "prompt": "In ancient Rome, wealthy women used the sweat of gladiators as a facial cream and as a powerful ________.",
+    "answer": "aphrodisiac",
+    "decoys": [
+      "love potion",
+      "perfume",
+      "makeup remover"
+    ]
+  },
+  {
+    "id": 48,
+    "prompt": "In 2018, an Indian man sued his parents for giving birth to him without his ________.",
+    "answer": "consent",
+    "decoys": [
+      "permission",
+      "approval",
+      "signature"
+    ]
+  },
+  {
+    "id": 49,
+    "prompt": "In medieval Europe, animals could be put on trial. In 1386, a pig in France was publicly executed for ________.",
+    "answer": "murder",
+    "decoys": [
+      "treason",
+      "theft",
+      "witchcraft"
+    ]
+  },
+  {
+    "id": 50,
+    "prompt": "In the Victorian era, some people used \"corpse medicine,\" which involved consuming ground-up ________ to cure various ailments.",
+    "answer": "mummies",
+    "decoys": [
+      "coffins",
+      "skeletons",
+      "tombstones"
+    ]
+  },
+  {
+    "id": 51,
+    "prompt": "In 964 AD, Pope John XII reportedly suffered a fatal stroke while in the middle of ________.",
+    "answer": "having sex",
+    "decoys": [
+      "stealing gold",
+      "exorcising demons",
+      "drinking wine"
+    ]
+  },
+  {
+    "id": 52,
+    "prompt": "In 2011, a Swedish man was arrested after attempting to build a nuclear reactor in his kitchen using radium, americium, and ________.",
+    "answer": "a stove",
+    "decoys": [
+      "a microwave",
+      "dish soap",
+      "tin foil"
+    ]
+  },
+  {
+    "id": 53,
+    "prompt": "King Charles II of England famously kept a collection of wigs made entirely from ________.",
+    "answer": "pubic hair",
+    "decoys": [
+      "dog fur",
+      "cobwebs",
+      "horse tails"
+    ]
+  },
+  {
+    "id": 54,
+    "prompt": "In 1871, lawyer Clement Vallandigham accidentally shot and killed himself in court while trying to prove his client's ________.",
+    "answer": "innocence",
+    "decoys": [
+      "insanity",
+      "sobriety",
+      "guilt"
+    ]
+  },
+  {
+    "id": 55,
+    "prompt": "Dr. John Harvey Kellogg originally created Corn Flakes in the late 19th century to discourage ________.",
+    "answer": "masturbation",
+    "decoys": [
+      "alcoholism",
+      "premarital sex",
+      "farting"
+    ]
+  },
+  {
+    "id": 56,
+    "prompt": "In 2012, a man in China successfully sued his wife for $120,000 after discovering she had lied about ________.",
+    "answer": "plastic surgery",
+    "decoys": [
+      "her real age",
+      "being a spy",
+      "having a twin"
+    ]
+  },
+  {
+    "id": 57,
+    "prompt": "In the 18th century, doctors commonly revived near-drowning victims by blowing tobacco smoke up their ________.",
+    "answer": "anus",
+    "decoys": [
+      "nose",
+      "ears",
+      "mouth"
+    ]
+  },
+  {
+    "id": 58,
+    "prompt": "Invented in the late 19th century to treat 'hysteria' in women, the first mechanical vibrators were powered by ________.",
+    "answer": "steam",
+    "decoys": [
+      "coal",
+      "cranks",
+      "water"
+    ]
+  },
+  {
+    "id": 59,
+    "prompt": "In ancient Greece, husbands who caught men sleeping with their wives were legally allowed to punish them by inserting a ________ into their anus.",
+    "answer": "radish",
+    "decoys": [
+      "pinecone",
+      "live eel",
+      "hot poker"
+    ]
+  },
+  {
+    "id": 60,
+    "prompt": "In 2007, a woman named Erika held a commitment ceremony where she legally married ________.",
+    "answer": "the Eiffel Tower",
+    "decoys": [
+      "a roller coaster",
+      "the Berlin Wall",
+      "a giant redwood"
+    ]
+  },
+  {
+    "id": 61,
+    "prompt": "In 1940, Dr. Carl Tanzler was caught in Florida after living, sleeping, and dancing with the ________ of a woman he obsessed over.",
+    "answer": "corpse",
+    "decoys": [
+      "taxidermied dog",
+      "mannequin",
+      "skeleton"
+    ]
+  },
+  {
+    "id": 62,
+    "prompt": "According to a 2018 survey, nearly 10% of adults admitted to using ________ as emergency toilet paper when caught off guard.",
+    "answer": "socks",
+    "decoys": [
+      "receipts",
+      "coffee filters",
+      "leaves"
+    ]
+  },
+  {
+    "id": 63,
+    "prompt": "Under a unique French law that is still technically active today, it is legal to marry a ________.",
+    "answer": "dead person",
+    "decoys": [
+      "hologram",
+      "first cousin",
+      "step-parent"
+    ]
+  },
+  {
+    "id": 64,
+    "prompt": "In the 19th century, some American families protected their loved ones' graves from robbers by installing \"coffin torpedoes\" designed to ________.",
+    "answer": "explode",
+    "decoys": [
+      "scream",
+      "inject poison",
+      "shoot spikes"
+    ]
+  },
+  {
+    "id": 65,
+    "prompt": "In the late 19th century, doctors invented the electric vibrator because manually massaging women to relieve \"hysteria\" was deemed ________.",
+    "answer": "too exhausting",
+    "decoys": [
+      "highly inappropriate",
+      "medically dangerous",
+      "too boring"
+    ]
+  },
+  {
+    "id": 66,
+    "prompt": "In 1995, a robber named McArthur Wheeler rubbed lemon juice all over his face because he mistakenly believed it would make him ________ to security cameras.",
+    "answer": "invisible",
+    "decoys": [
+      "unrecognizable",
+      "look like a lemon",
+      "blend into walls"
+    ]
+  },
+  {
+    "id": 67,
+    "prompt": "In 1386, a pig in Falaise, France, was arrested, dressed in men's clothes, tried in court, and publicly executed for the crime of ________.",
+    "answer": "murder",
+    "decoys": [
+      "witchcraft",
+      "stealing bread",
+      "treason"
+    ]
+  },
+  {
+    "id": 68,
+    "prompt": "In 1994, the U.S. Air Force researched a non-lethal chemical weapon colloquially known as the \"________,\" designed to make enemy soldiers sexually attracted to each other.",
+    "answer": "gay bomb",
+    "decoys": [
+      "love potion gas",
+      "aphrodisiac bomb",
+      "pink mist"
+    ]
+  },
+  {
+    "id": 69,
+    "prompt": "In the 18th century, wealthy English estate owners would hire \"garden hermits\" whose sole job was to live in a cave, grow their hair out, and never ________.",
+    "answer": "cut their nails",
+    "decoys": [
+      "wear clothes",
+      "speak English",
+      "take baths"
+    ]
+  },
+  {
+    "id": 70,
+    "prompt": "From the 1930s to the 1950s, the most reliable pregnancy test involved injecting a woman's urine into a live ________ and waiting to see if it spawned.",
+    "answer": "frog",
+    "decoys": [
+      "rabbit",
+      "mouse",
+      "goldfish"
+    ]
+  },
+  {
+    "id": 71,
+    "prompt": "In 16th-century France, a woman could legally sue her husband for impotence, which required him to try and perform in front of a panel of _______.",
+    "answer": "court surgeons",
+    "decoys": [
+      "royal priests",
+      "village elders",
+      "his in-laws"
+    ]
+  },
+  {
+    "id": 72,
+    "prompt": "King Adolf Frederick of Sweden famously ate himself to death in 1771, finishing his final meal with 14 servings of dessert served in bowls of _______.",
+    "answer": "hot milk",
+    "decoys": [
+      "melted butter",
+      "warm beer",
+      "sweet gravy"
+    ]
+  },
+  {
+    "id": 73,
+    "prompt": "During the 15th century, wealthy European men wore elaborate codpieces not just for fashion, but also to hide medicine-soaked bandages used to treat _______.",
+    "answer": "syphilis",
+    "decoys": [
+      "leprosy",
+      "pubic lice",
+      "gout"
+    ]
+  },
+  {
+    "id": 74,
+    "prompt": "To cure stubborn cases of hiccups, a bizarre but medically documented 2006 study recommends performing a digital rectal _______.",
+    "answer": "massage",
+    "decoys": [
+      "stimulation",
+      "examination",
+      "stretching"
+    ]
+  },
+  {
+    "id": 75,
+    "prompt": "In 18th-century England, a bizarre fashion trend among wealthy women involved gluing artificial eyebrows to their faces made from _______.",
+    "answer": "mouse skin",
+    "decoys": [
+      "beaver fur",
+      "horse hair",
+      "squirrel tails"
+    ]
+  },
+  {
+    "id": 76,
+    "prompt": "In 2013, police in Germany launched a massive manhunt after thieves successfully stole five tons of _______ from a parked trailer.",
+    "answer": "Nutella",
+    "decoys": [
+      "condoms",
+      "toilet paper",
+      "gummy bears"
+    ]
+  },
+  {
+    "id": 77,
+    "prompt": "Due to an unusual evolutionary trait, male kangaroos and wombats have testicles that are positioned _______ their penis.",
+    "answer": "above",
+    "decoys": [
+      "inside",
+      "behind",
+      "underneath"
+    ]
+  },
+  {
+    "id": 78,
+    "prompt": "In Victorian England, wealthy families who wanted to appear popular would hire professional mourners whose sole job was to _______ during the funeral.",
+    "answer": "weep loudly",
+    "decoys": [
+      "faint dramatically",
+      "scream in grief",
+      "recite poetry"
+    ]
+  },
+  {
+    "id": 79,
+    "prompt": "Before modern medical tests, doctors in the 1940s would inject a woman's urine into a live _______ to determine if she was pregnant.",
+    "answer": "frog",
+    "decoys": [
+      "pigeon",
+      "ferret",
+      "hamster"
+    ]
+  },
+  {
+    "id": 80,
+    "prompt": "The government of Iceland sponsors an app linked to a national database to prevent citizens from accidentally _______ their own cousins.",
+    "answer": "sleeping with",
+    "decoys": [
+      "marrying",
+      "dating",
+      "suing"
+    ]
+  },
+  {
+    "id": 81,
+    "prompt": "In 1923, jockey Frank Hayes won a race at Belmont Park despite being dead, because ________ kept him upright in the saddle.",
+    "answer": "rigor mortis",
+    "decoys": [
+      "duct tape",
+      "tight pants",
+      "a heavy saddle"
+    ]
+  },
+  {
+    "id": 82,
+    "prompt": "In 2012, a man in Sweden was arrested after police discovered he was attempting to build a working ________ in his kitchen.",
+    "answer": "nuclear reactor",
+    "decoys": [
+      "meth lab",
+      "guillotine",
+      "cloning vat"
+    ]
+  },
+  {
+    "id": 83,
+    "prompt": "Lord Byron, famous for his eccentricities, was forbidden from keeping a dog at his Cambridge college, so he brought a pet ________ instead.",
+    "answer": "bear",
+    "decoys": [
+      "badger",
+      "crocodile",
+      "peacock"
+    ]
+  },
+  {
+    "id": 84,
+    "prompt": "In 18th-century England, a popular but bizarre folk remedy for treating a sore throat was to wrap a ________ around your neck.",
+    "answer": "dirty sock",
+    "decoys": [
+      "dead eel",
+      "used bandage",
+      "salted bacon"
+    ]
+  },
+  {
+    "id": 85,
+    "prompt": "In 2015, a man in Florida was arrested after trying to rob a Wendy's drive-thru by throwing a ________ through the window.",
+    "answer": "live alligator",
+    "decoys": [
+      "hot lasagna",
+      "lit firework",
+      "dead squirrel"
+    ]
+  },
+  {
+    "id": 86,
+    "prompt": "According to a study on insect behavior, male fruit flies that are rejected by females are much more likely to consume ________.",
+    "answer": "alcohol",
+    "decoys": [
+      "caffeine",
+      "rotten fruit",
+      "their own wings"
+    ]
+  },
+  {
+    "id": 87,
+    "prompt": "In medieval Europe, animals could be put on trial. In 1474, a chicken in Switzerland was sentenced to death for the crime of ________.",
+    "answer": "laying an egg",
+    "decoys": [
+      "satanic clucking",
+      "pecking a priest",
+      "stealing communion"
+    ]
+  },
+  {
+    "id": 88,
+    "prompt": "King Henry VIII employed several highly trusted court officials known as the 'Grooms of the Stool', whose primary job was to ________.",
+    "answer": "wipe his bottom",
+    "decoys": [
+      "empty his chamberpot",
+      "inspect his underwear",
+      "guard his bedroom"
+    ]
+  },
+  {
+    "id": 89,
+    "prompt": "In the state of Victoria, Australia, it is legally forbidden to wear ________ in public on Sunday afternoons.",
+    "answer": "pink pants",
+    "decoys": [
+      "clown shoes",
+      "a fake mustache",
+      "only a towel"
+    ]
+  },
+  {
+    "id": 90,
+    "prompt": "In 1995, a man successfully robbed two banks in Pittsburgh using lemon juice as a disguise, believing it made him ________.",
+    "answer": "invisible",
+    "decoys": [
+      "look younger",
+      "undetectable to dogs",
+      "immune to dye packs"
+    ]
+  },
+  {
+    "id": 91,
+    "prompt": "In 18th-century England, some wealthy elites hired poor people to live in their gardens as ornamental ________.",
+    "answer": "hermits",
+    "decoys": [
+      "gnomes",
+      "statues",
+      "scarecrows"
+    ]
+  },
+  {
+    "id": 92,
+    "prompt": "In the 1920s, a bizarre medical fad promised to restore male youth by surgically transplanting the testicles of ________.",
+    "answer": "monkeys",
+    "decoys": [
+      "goats",
+      "bulls",
+      "roosters"
+    ]
+  },
+  {
+    "id": 93,
+    "prompt": "In 19th-century Europe, doctors treated women diagnosed with 'hysteria' by administering therapeutic ________.",
+    "answer": "pelvic massages",
+    "decoys": [
+      "cocaine doses",
+      "cold showers",
+      "electric shocks"
+    ]
+  },
+  {
+    "id": 94,
+    "prompt": "In ancient Rome, fashionable upper-class women purchased and applied the sweat of ________ as a facial moisturizer.",
+    "answer": "gladiators",
+    "decoys": [
+      "emperors",
+      "stallions",
+      "priests"
+    ]
+  },
+  {
+    "id": 95,
+    "prompt": "In 1995, a bank robber in Pittsburgh covered his face in lemon juice, foolishly believing it would make him ________.",
+    "answer": "invisible",
+    "decoys": [
+      "bulletproof",
+      "unrecognizable",
+      "odorless"
+    ]
+  },
+  {
+    "id": 96,
+    "prompt": "To prevent grave robbing in Victorian England, families often buried their dead inside heavy iron cages called ________.",
+    "answer": "mortsafes",
+    "decoys": [
+      "coffin cages",
+      "iron cribs",
+      "soul lockers"
+    ]
+  },
+  {
+    "id": 97,
+    "prompt": "In 18th-century England, a bizarre fashion trend among wealthy women involved wearing fake eyebrows made of ________ skin.",
+    "answer": "mouse",
+    "decoys": [
+      "beaver",
+      "squirrel",
+      "mole"
+    ]
+  },
+  {
+    "id": 98,
+    "prompt": "In 1233, Pope Gregory IX issued a papal bull that declared ________ to be instruments of Satanic worship.",
+    "answer": "cats",
+    "decoys": [
+      "owls",
+      "lefties",
+      "toads"
+    ]
+  },
+  {
+    "id": 99,
+    "prompt": "In 2012, a Swedish man was arrested after attempting to build a working nuclear reactor on his ________.",
+    "answer": "kitchen stove",
+    "decoys": [
+      "apartment balcony",
+      "dining table",
+      "toilet seat"
+    ]
+  },
+  {
+    "id": 100,
+    "prompt": "According to an old, bizarre Chicago law, it is illegal to give ________ to a dog.",
+    "answer": "whiskey",
+    "decoys": [
+      "cigars",
+      "perfume",
+      "coffee"
+    ]
+  },
+  {
+    "id": 101,
+    "prompt": "In the 1920s, a popular but highly dangerous medical treatment for impotence involved surgically grafting _______ glands onto human testicles.",
+    "answer": "goat",
+    "decoys": [
+      "monkey",
+      "bull",
+      "rooster"
+    ]
+  },
+  {
+    "id": 102,
+    "prompt": "In the early 20th century, Lysol was heavily marketed to women not as a household disinfectant, but as a method of _______.",
+    "answer": "contraception",
+    "decoys": [
+      "weight loss",
+      "teeth whitening",
+      "makeup removal"
+    ]
+  },
+  {
+    "id": 103,
+    "prompt": "The first recorded 'mooning' in history occurred in 66 AD, when a Roman soldier flashed a Jewish crowd and loudly _______.",
+    "answer": "farted",
+    "decoys": [
+      "screamed",
+      "burped",
+      "howled"
+    ]
+  },
+  {
+    "id": 104,
+    "prompt": "Under a very specific, tragic law in France, it is legally permissible to marry a _______.",
+    "answer": "dead person",
+    "decoys": [
+      "ghost",
+      "pet dog",
+      "step-sibling"
+    ]
+  },
+  {
+    "id": 105,
+    "prompt": "In 18th-century France, an insatiable man named Tarrare was once kicked out of a hospital under suspicion of eating a _______.",
+    "answer": "baby",
+    "decoys": [
+      "corpse",
+      "live cat",
+      "doctor's leg"
+    ]
+  },
+  {
+    "id": 106,
+    "prompt": "In Victorian England, wealthy eccentrics would sometimes hire poor people to live on their estates and act as 'ornamental _______'.",
+    "answer": "hermits",
+    "decoys": [
+      "goblins",
+      "gargoyles",
+      "scarecrows"
+    ]
+  },
+  {
+    "id": 107,
+    "prompt": "In 1993, a British man had to be rescued by emergency services after getting his penis stuck in a _______.",
+    "answer": "vacuum cleaner",
+    "decoys": [
+      "bowling ball",
+      "metal pipe",
+      "toaster"
+    ]
+  },
+  {
+    "id": 108,
+    "prompt": "In the 16th century, wealthy Europeans practiced 'corpse medicine,' which included consuming a powdered substance made from crushed _______.",
+    "answer": "mummies",
+    "decoys": [
+      "skulls",
+      "tombstones",
+      "coffin wood"
+    ]
+  },
+  {
+    "id": 109,
+    "prompt": "In 1995, an infamous bank robber covered his face in _______ juice, mistakenly believing it would make him invisible to security cameras.",
+    "answer": "lemon",
+    "decoys": [
+      "onion",
+      "pickle",
+      "grapefruit"
+    ]
+  },
+  {
+    "id": 110,
+    "prompt": "In 1923, jockey Frank Hayes won a race at Belmont Park despite being dead, having suffered a fatal _______ mid-race.",
+    "answer": "heart attack",
+    "decoys": [
+      "stroke",
+      "seizure",
+      "choking fit"
+    ]
+  },
+  {
+    "id": 111,
+    "prompt": "In 1923, a jockey named Frank Hayes won a prestigious race at Belmont Park despite being ________ at the time.",
+    "answer": "Dead",
+    "decoys": [
+      "Asleep",
+      "Drunk",
+      "Blind"
+    ]
+  },
+  {
+    "id": 112,
+    "prompt": "In ancient Rome, wealthy citizens paid top dollar to import bottled ________ from Portugal to use as a teeth-whitening mouthwash.",
+    "answer": "Urine",
+    "decoys": [
+      "Goat blood",
+      "Donkey milk",
+      "Fermented fish"
+    ]
+  },
+  {
+    "id": 113,
+    "prompt": "In 897 AD, Pope Stephen VI ordered the exhumation of his predecessor, Pope Formosus, so that he could put the deceased pope's ________ on trial.",
+    "answer": "Corpse",
+    "decoys": [
+      "Ghost",
+      "Wardrobe",
+      "Left hand"
+    ]
+  },
+  {
+    "id": 114,
+    "prompt": "In 1995, a man successfully robbed two banks after rubbing ________ on his face, mistakenly believing it would make him invisible to security cameras.",
+    "answer": "Lemon juice",
+    "decoys": [
+      "Vaseline",
+      "Blue paint",
+      "Mayonnaise"
+    ]
+  },
+  {
+    "id": 115,
+    "prompt": "In Victorian England, doctors treated women diagnosed with 'hysteria' by utilizing a newly invented medical tool: the ________.",
+    "answer": "Vibrator",
+    "decoys": [
+      "Vacuum cleaner",
+      "Stethoscope",
+      "Electric chair"
+    ]
+  },
+  {
+    "id": 116,
+    "prompt": "John Harvey Kellogg originally invented ________ in the late 19th century as a bland, anti-aphrodisiac food to discourage masturbation.",
+    "answer": "Corn flakes",
+    "decoys": [
+      "Graham crackers",
+      "Oatmeal",
+      "Grape juice"
+    ]
+  },
+  {
+    "id": 117,
+    "prompt": "In 2014, an American exchange student in Germany made international headlines after getting trapped inside a giant outdoor stone sculpture shaped like a ________.",
+    "answer": "Vagina",
+    "decoys": [
+      "Butt cheek",
+      "Toilet",
+      "Hot dog"
+    ]
+  },
+  {
+    "id": 118,
+    "prompt": "Tarrare, an 18th-century French showman known for his horrific appetite, was kicked out of a hospital under suspicion of eating an actual ________.",
+    "answer": "Toddler",
+    "decoys": [
+      "Corpse",
+      "Bed sheet",
+      "Golden retriever"
+    ]
+  },
+  {
+    "id": 119,
+    "prompt": "It wasn't until 2007 that the state of Texas finally lifted its long-standing, controversial ban on the sale of ________.",
+    "answer": "Sex toys",
+    "decoys": [
+      "Tattoo ink",
+      "Bikinis",
+      "Sextants"
+    ]
+  },
+  {
+    "id": 120,
+    "prompt": "In ancient Egypt, when a beloved household cat died, grieving family members would shave off their own ________ as a sign of mourning.",
+    "answer": "Eyebrows",
+    "decoys": [
+      "Chest hair",
+      "Beards",
+      "Eyelashes"
+    ]
+  },
+  {
+    "id": 121,
+    "prompt": "Pope John XII reportedly died in 964 AD after a jealous husband caught him _______.",
+    "answer": "having sex",
+    "decoys": [
+      "stealing wine",
+      "singing naked",
+      "doing magic"
+    ]
+  },
+  {
+    "id": 122,
+    "prompt": "In 2011, a man in Sweden was arrested after trying to build a working _______ in his kitchen.",
+    "answer": "nuclear reactor",
+    "decoys": [
+      "guillotine",
+      "pirate radio",
+      "chemical weapon"
+    ]
+  },
+  {
+    "id": 123,
+    "prompt": "Dr. John Harvey Kellogg originally invented Corn Flakes in the late 19th century to prevent _______.",
+    "answer": "masturbation",
+    "decoys": [
+      "night sweats",
+      "frequent lying",
+      "sinful thoughts"
+    ]
+  },
+  {
+    "id": 124,
+    "prompt": "In Victorian England, a popular parlor game called \"Snapdragon\" involved people snatching raisins out of _______ and eating them.",
+    "answer": "brandy on fire",
+    "decoys": [
+      "a dead bird",
+      "a chamber pot",
+      "boiling wax"
+    ]
+  },
+  {
+    "id": 125,
+    "prompt": "Under ancient Roman law, the punishment for killing your parent involved being sewn into a sack with a dog, a rooster, a viper, and a _______, then thrown into the sea.",
+    "answer": "monkey",
+    "decoys": [
+      "pig",
+      "cat",
+      "badger"
+    ]
+  },
+  {
+    "id": 126,
+    "prompt": "In the 18th century, wealthy Europeans could buy \"memento mori\" rings that contained a small compartment specifically for holding a loved one's _______.",
+    "answer": "pubic hair",
+    "decoys": [
+      "dried blood",
+      "fingernails",
+      "baby teeth"
+    ]
+  },
+  {
+    "id": 127,
+    "prompt": "In 1995, a man successfully robbed two banks after rubbing _______ on his face, foolishly believing it would make him invisible to security cameras.",
+    "answer": "lemon juice",
+    "decoys": [
+      "cooking spray",
+      "invisible ink",
+      "baby powder"
+    ]
+  },
+  {
+    "id": 128,
+    "prompt": "In 15th-century France, a woman could legally sue her husband for a divorce if he was unable to _______.",
+    "answer": "get an erection",
+    "decoys": [
+      "stop farting",
+      "fight a duel",
+      "provide wine"
+    ]
+  },
+  {
+    "id": 129,
+    "prompt": "Before the invention of modern vibrators, 19th-century doctors used them as medical devices to treat women suffering from _______.",
+    "answer": "hysteria",
+    "decoys": [
+      "laziness",
+      "bad attitudes",
+      "mood swings"
+    ]
+  },
+  {
+    "id": 130,
+    "prompt": "In 1912, tailor Franz Reichelt died after jumping off the Eiffel Tower while trying to test his invention: a _______.",
+    "answer": "wearable parachute",
+    "decoys": [
+      "pair of wings",
+      "flying bicycle",
+      "metal umbrella"
+    ]
+  },
+  {
+    "id": 131,
+    "prompt": "In 1995, a man successfully robbed two banks with his face covered in ________, mistakenly believing it would make him invisible to security cameras.",
+    "answer": "lemon juice",
+    "decoys": [
+      "olive oil",
+      "invisible ink",
+      "mayonnaise"
+    ]
+  },
+  {
+    "id": 132,
+    "prompt": "During the Victorian era, some women used a highly dangerous beauty product containing ________ to make their pupils look dilated and 'dreamy.'",
+    "answer": "belladonna",
+    "decoys": [
+      "arsenic",
+      "cyanide",
+      "chloroform"
+    ]
+  },
+  {
+    "id": 133,
+    "prompt": "In ancient Rome, it was considered a major status symbol for wealthy women to use gladiators' ________ as a facial cosmetic.",
+    "answer": "sweat",
+    "decoys": [
+      "blood",
+      "hair",
+      "urine"
+    ]
+  },
+  {
+    "id": 134,
+    "prompt": "In 2011, a man in Sweden was arrested after trying to split atoms and build a working nuclear reactor inside his ________.",
+    "answer": "kitchen",
+    "decoys": [
+      "bathtub",
+      "basement",
+      "backyard"
+    ]
+  },
+  {
+    "id": 135,
+    "prompt": "In the 13th century, Pope Gregory IX declared war on ________, associating them with devil worship, which historians believe helped the Black Plague spread.",
+    "answer": "cats",
+    "decoys": [
+      "rats",
+      "owls",
+      "toads"
+    ]
+  },
+  {
+    "id": 136,
+    "prompt": "Under a bizarre colonial-era law enforced in Swaziland in 2012, women were strictly banned from wearing ________ in public.",
+    "answer": "mini skirts",
+    "decoys": [
+      "high heels",
+      "trousers",
+      "swimsuits"
+    ]
+  },
+  {
+    "id": 137,
+    "prompt": "In Victorian England, it was a popular but morbid trend for families to take formal portraits posing with ________.",
+    "answer": "dead relatives",
+    "decoys": [
+      "taxidermy pets",
+      "live bears",
+      "loaded weapons"
+    ]
+  },
+  {
+    "id": 138,
+    "prompt": "In 1726, an English woman named Mary Toft famously managed to convince several prominent doctors that she had given birth to ________.",
+    "answer": "rabbits",
+    "decoys": [
+      "kittens",
+      "lobsters",
+      "frogs"
+    ]
+  },
+  {
+    "id": 139,
+    "prompt": "Frustrated by his university's strict ban on dogs, Lord Byron famously kept a pet ________ in his Cambridge dorm room instead.",
+    "answer": "bear",
+    "decoys": [
+      "monkey",
+      "badger",
+      "peacock"
+    ]
+  },
+  {
+    "id": 140,
+    "prompt": "In 1912, Franz Reichelt tragically died after jumping off the Eiffel Tower while testing his homemade ________.",
+    "answer": "parachute suit",
+    "decoys": [
+      "bird wings",
+      "flying bicycle",
+      "spring boots"
+    ]
+  },
+  {
+    "id": 141,
+    "prompt": "In 1996, a Swedish man was arrested at an airport for trying to smuggle 65 live infant __________ down his pants.",
+    "answer": "snakes",
+    "decoys": [
+      "hamsters",
+      "turtles",
+      "scorpions"
+    ]
+  },
+  {
+    "id": 142,
+    "prompt": "In 1923, a jockey named Frank Hayes won a race at Belmont Park despite being __________ during the middle of it.",
+    "answer": "dead",
+    "decoys": [
+      "asleep",
+      "naked",
+      "drunk"
+    ]
+  },
+  {
+    "id": 143,
+    "prompt": "In 2013, a fisherman in Belarus was tragically killed by a ___________ after he tried to grab it for a photo.",
+    "answer": "beaver",
+    "decoys": [
+      "swan",
+      "badger",
+      "wild boar"
+    ]
+  },
+  {
+    "id": 144,
+    "prompt": "In the Victorian era, some men used a painful spiked metal device called a 'spermatorrhoea ring' to prevent __________.",
+    "answer": "wet dreams",
+    "decoys": [
+      "masturbation",
+      "sleepwalking",
+      "erections"
+    ]
+  },
+  {
+    "id": 145,
+    "prompt": "In 2012, a man in Michigan was arrested after trying to pay a prostitute with __________.",
+    "answer": "a raw steak",
+    "decoys": [
+      "a microwave",
+      "a live chicken",
+      "Monopoly money"
+    ]
+  },
+  {
+    "id": 146,
+    "prompt": "King Adolf Frederick of Sweden died in 1771 after consuming a massive feast that ended with 14 servings of __________.",
+    "answer": "cream buns",
+    "decoys": [
+      "hot chocolate",
+      "pickled herring",
+      "marzipan"
+    ]
+  },
+  {
+    "id": 147,
+    "prompt": "In 2015, a Florida man was arrested after throwing a __________ through a Wendy's drive-thru window.",
+    "answer": "live alligator",
+    "decoys": [
+      "frozen turkey",
+      "lit firework",
+      "toilet seat"
+    ]
+  },
+  {
+    "id": 148,
+    "prompt": "In the Middle Ages, some Europeans wore amulets containing wolf feces in order to cure __________.",
+    "answer": "hemorrhoids",
+    "decoys": [
+      "bad breath",
+      "baldness",
+      "nightmares"
+    ]
+  },
+  {
+    "id": 149,
+    "prompt": "In 1233, Pope Gregory IX issued a papal bull that declared __________ to be instruments of Satan, leading to their mass slaughter.",
+    "answer": "black cats",
+    "decoys": [
+      "toads",
+      "left-handed people",
+      "redheads"
+    ]
+  },
+  {
+    "id": 150,
+    "prompt": "A popular 19th-century patent medicine called 'Mrs. Winslow's Soothing Syrup' successfully quieted crying babies because it contained __________.",
+    "answer": "morphine",
+    "decoys": [
+      "whiskey",
+      "chloroform",
+      "cocaine"
+    ]
+  },
+  {
+    "id": 151,
+    "prompt": "In 897 AD, Pope Stephen VI put his dead predecessor's corpse on trial, found him guilty, and cut off his three ______.",
+    "answer": "blessing fingers",
+    "decoys": [
+      "golden teeth",
+      "favorite toes",
+      "holy kneecaps"
+    ]
+  },
+  {
+    "id": 152,
+    "prompt": "In the late 19th century, doctors invented the electric vibrator because they were tired of manually treating female patients for hysteria using ______.",
+    "answer": "pelvic massages",
+    "decoys": [
+      "steam therapy",
+      "feather tickling",
+      "finger exercises"
+    ]
+  },
+  {
+    "id": 153,
+    "prompt": "In 1993, Toronto lawyer Garry Hoy fatally fell from the 24th floor of a skyscraper while trying to prove to students that the glass windows were ______.",
+    "answer": "unbreakable",
+    "decoys": [
+      "bulletproof",
+      "made of plastic",
+      "shatterproof"
+    ]
+  },
+  {
+    "id": 154,
+    "prompt": "In 18th-century England, wealthy landowners would hire people to live in their gardens as professional, decorative ______.",
+    "answer": "hermits",
+    "decoys": [
+      "gargoyles",
+      "scarecrows",
+      "elves"
+    ]
+  },
+  {
+    "id": 155,
+    "prompt": "In ancient Rome, wealthy women would buy pots of sweat scraped from victorious gladiators to use as ______.",
+    "answer": "face cream",
+    "decoys": [
+      "perfume",
+      "aphrodisiacs",
+      "lip balm"
+    ]
+  },
+  {
+    "id": 156,
+    "prompt": "In 1994, the US military proposed a non-lethal chemical weapon designed to make enemy soldiers sexually attracted to each other, famously known as the ______.",
+    "answer": "gay bomb",
+    "decoys": [
+      "love potion",
+      "rainbow gas",
+      "orgasm ray"
+    ]
+  },
+  {
+    "id": 157,
+    "prompt": "In 1899, French President Félix Faure died in office under scandalous circumstances, suffering a fatal stroke while receiving ______.",
+    "answer": "oral sex",
+    "decoys": [
+      "a foot massage",
+      "a sponge bath",
+      "electrotherapy"
+    ]
+  },
+  {
+    "id": 158,
+    "prompt": "In 1995, McArthur Wheeler successfully robbed two banks without a mask, believing his face was invisible to security cameras because he had covered it in ______.",
+    "answer": "lemon juice",
+    "decoys": [
+      "vaseline",
+      "invisible ink",
+      "cooking spray"
+    ]
+  },
+  {
+    "id": 159,
+    "prompt": "According to legend, the ancient Greek playwright Aeschylus died when an eagle dropped a tortoise on his head, apparently mistaking his bald head for a ______.",
+    "answer": "rock",
+    "decoys": [
+      "nest",
+      "giant egg",
+      "stepping stone"
+    ]
+  },
+  {
+    "id": 160,
+    "prompt": "To force himself to overcome severe writer's block while working on his novels, French author Victor Hugo would write while completely ______.",
+    "answer": "naked",
+    "decoys": [
+      "drunk",
+      "blindfolded",
+      "upside down"
+    ]
+  },
+  {
+    "id": 161,
+    "prompt": "In 2014, a US exchange student in Germany had to be rescued by 22 firefighters after getting trapped inside a giant stone sculpture of a ________.",
+    "answer": "vagina",
+    "decoys": [
+      "toilet",
+      "beer stein",
+      "buttocks"
+    ]
+  },
+  {
+    "id": 162,
+    "prompt": "Under an old and bizarre French law, it is technically legal for a living person to ________ a dead person.",
+    "answer": "marry",
+    "decoys": [
+      "sue",
+      "adopt",
+      "employ"
+    ]
+  },
+  {
+    "id": 163,
+    "prompt": "In 2004, a Romanian inmate sued his local church because God failed to answer his prayers and save him from ________.",
+    "answer": "prison",
+    "decoys": [
+      "his wife",
+      "baldness",
+      "poverty"
+    ]
+  },
+  {
+    "id": 164,
+    "prompt": "In 2018, a flight from Dubai to Amsterdam was forced to make an emergency landing because a passenger refused to stop ________.",
+    "answer": "farting",
+    "decoys": [
+      "singing",
+      "vaping",
+      "crying"
+    ]
+  },
+  {
+    "id": 165,
+    "prompt": "In 18th-century England, wealthy aristocrats would sometimes hire \"ornamental hermits\" to live in their gardens and never ________.",
+    "answer": "bathe",
+    "decoys": [
+      "speak",
+      "wear clothes",
+      "sleep"
+    ]
+  },
+  {
+    "id": 166,
+    "prompt": "Before modern pregnancy tests, doctors in the 1940s would inject a woman's urine into a live ________ to see if it would spawn eggs.",
+    "answer": "frog",
+    "decoys": [
+      "mouse",
+      "chicken",
+      "goldfish"
+    ]
+  },
+  {
+    "id": 167,
+    "prompt": "In 1923, a jockey named Frank Hayes won a race at Belmont Park despite being ________ during the entire second half of the race.",
+    "answer": "dead",
+    "decoys": [
+      "asleep",
+      "blindfolded",
+      "naked"
+    ]
+  },
+  {
+    "id": 168,
+    "prompt": "In 1998, a man in Michigan was arrested for violating an obscure 101-year-old law that banned ________ in front of women and children.",
+    "answer": "swearing",
+    "decoys": [
+      "burping",
+      "scratching",
+      "farting"
+    ]
+  },
+  {
+    "id": 169,
+    "prompt": "During the Cold War, the Canadian government spent years developing the \"fruit machine,\" a device designed to detect ________ in federal employees.",
+    "answer": "homosexuality",
+    "decoys": [
+      "communism",
+      "lying",
+      "laziness"
+    ]
+  },
+  {
+    "id": 170,
+    "prompt": "In 2015, a man in Florida was arrested after attempting to rob a Wendy's drive-thru by throwing a ________ at the cashier.",
+    "answer": "live alligator",
+    "decoys": [
+      "human skull",
+      "frozen turkey",
+      "chainsaw"
+    ]
+  },
+  {
+    "id": 171,
+    "prompt": "Wealthy women in ancient Rome would purchase vials of gladiators' ________ to use as a facial cream and aphrodisiac.",
+    "answer": "sweat",
+    "decoys": [
+      "blood",
+      "bathwater",
+      "saliva"
+    ]
+  },
+  {
+    "id": 172,
+    "prompt": "The 15th-century witch-hunting manual 'Malleus Maleficarum' claimed that witches could steal men's penises and keep them in nests, where they would feed them ________.",
+    "answer": "oats",
+    "decoys": [
+      "milk",
+      "flies",
+      "beer"
+    ]
+  },
+  {
+    "id": 173,
+    "prompt": "In 1995, McArthur Wheeler successfully robbed two banks with ________ on his face, foolishly believing it would make him invisible to security cameras.",
+    "answer": "lemon juice",
+    "decoys": [
+      "mayonnaise",
+      "invisible ink",
+      "melted wax"
+    ]
+  },
+  {
+    "id": 174,
+    "prompt": "Health fanatic John Harvey Kellogg originally created Corn Flakes in the late 19th century specifically to stop people from ________.",
+    "answer": "masturbating",
+    "decoys": [
+      "eating meat",
+      "having sex",
+      "swearing"
+    ]
+  },
+  {
+    "id": 175,
+    "prompt": "In 2015, Florida resident Joshua James was arrested after throwing an active ________ through a Wendy's drive-thru window.",
+    "answer": "alligator",
+    "decoys": [
+      "chainsaw",
+      "swarm of bees",
+      "microwave"
+    ]
+  },
+  {
+    "id": 176,
+    "prompt": "During the Cold War, the CIA's 'Project Acoustic Kitty' surgically implanted a transmitter into a cat, running the antenna wire through its ________.",
+    "answer": "tail",
+    "decoys": [
+      "collar",
+      "spine",
+      "whiskers"
+    ]
+  },
+  {
+    "id": 177,
+    "prompt": "In 1771, King Adolf Frederick of Sweden literally ate himself to death, passing away after consuming 14 servings of ________.",
+    "answer": "sweet buns",
+    "decoys": [
+      "pickled herring",
+      "cabbage soup",
+      "chocolate cake"
+    ]
+  },
+  {
+    "id": 178,
+    "prompt": "Koro is a psychiatric disorder characterized by an overwhelming, irrational fear that one's genitals are ________.",
+    "answer": "shrinking",
+    "decoys": [
+      "turning green",
+      "exploding",
+      "falling off"
+    ]
+  },
+  {
+    "id": 179,
+    "prompt": "In 1386, a French court sentenced a pig to be publicly hanged for murder, but only after dressing the pig in ________.",
+    "answer": "human clothes",
+    "decoys": [
+      "a wedding dress",
+      "a suit of armor",
+      "monk robes"
+    ]
+  },
+  {
+    "id": 180,
+    "prompt": "In the early 19th century, before modern materials, wealthy people wore dentures made from the actual teeth of ________.",
+    "answer": "dead soldiers",
+    "decoys": [
+      "executed criminals",
+      "zoo animals",
+      "plague victims"
+    ]
+  },
+  {
+    "id": 181,
+    "prompt": "In 2012, a Swedish man was arrested after police discovered he was attempting to build a functioning [blank] in his kitchen.",
+    "answer": "nuclear reactor",
+    "decoys": [
+      "meth lab",
+      "guillotine",
+      "cloning machine"
+    ]
+  },
+  {
+    "id": 182,
+    "prompt": "In 18th-century England, wealthy aristocrats hired \"ornamental hermits\" to live on their estates, on the condition that they never did this.",
+    "answer": "cut their nails",
+    "decoys": [
+      "wore clothes",
+      "bathed",
+      "spoke words"
+    ]
+  },
+  {
+    "id": 183,
+    "prompt": "The preserved head of philosopher Jeremy Bentham had to be locked away because prank-playing college students kept using it to play [blank].",
+    "answer": "football",
+    "decoys": [
+      "beer pong",
+      "bowling",
+      "catch"
+    ]
+  },
+  {
+    "id": 184,
+    "prompt": "In 1994, the US military proposed a non-lethal chemical weapon nicknamed the \"Gay Bomb,\" which was designed to make enemy soldiers [blank].",
+    "answer": "sexually attracted",
+    "decoys": [
+      "dress in drag",
+      "start crying",
+      "hug it out"
+    ]
+  },
+  {
+    "id": 185,
+    "prompt": "To deter late-night public urination, the St. Pauli quarter of Hamburg coated its walls in a substance that literally did this to offenders.",
+    "answer": "peed back",
+    "decoys": [
+      "turned them blue",
+      "shocked them",
+      "melted shoes"
+    ]
+  },
+  {
+    "id": 186,
+    "prompt": "In 1567, Austrian mayor Hans Steininger famously died when he tripped over his own [blank] while trying to escape a fire.",
+    "answer": "beard",
+    "decoys": [
+      "robes",
+      "shoelaces",
+      "pet goose"
+    ]
+  },
+  {
+    "id": 187,
+    "prompt": "In Victorian England, doctors routinely treated women diagnosed with \"hysteria\" by manually administering pelvic massages, which led to the invention of the [blank].",
+    "answer": "vibrator",
+    "decoys": [
+      "chainsaw",
+      "vacuum cleaner",
+      "exercise bike"
+    ]
+  },
+  {
+    "id": 188,
+    "prompt": "In 2015, a thief in Poland avoided security guards for days by posing motionless as a [blank] in a department store window.",
+    "answer": "mannequin",
+    "decoys": [
+      "coat rack",
+      "wax figure",
+      "trash can"
+    ]
+  },
+  {
+    "id": 189,
+    "prompt": "In 1923, a jockey named Frank Hayes won a race at Belmont Park despite having suffered a fatal [blank] mid-race.",
+    "answer": "heart attack",
+    "decoys": [
+      "stroke",
+      "seizure",
+      "decapitation"
+    ]
+  },
+  {
+    "id": 190,
+    "prompt": "Pope Gregory IX once declared war on [blank], associating them with devil worship, which historians believe contributed to the spread of the Black Plague.",
+    "answer": "black cats",
+    "decoys": [
+      "baths",
+      "left-handers",
+      "rats"
+    ]
+  },
+  {
+    "id": 191,
+    "prompt": "In 2012, a desperate man in Boston was arrested for attempting to pay a prostitute using ________.",
+    "answer": "a frozen turkey",
+    "decoys": [
+      "a live ferret",
+      "a Pokemon card",
+      "a subway pass"
+    ]
+  },
+  {
+    "id": 192,
+    "prompt": "In the 19th century, doctors commonly recommended that women suffering from \"hysteria\" should be treated with ________.",
+    "answer": "vibrators",
+    "decoys": [
+      "leeches",
+      "electric shocks",
+      "hot pepper enemas"
+    ]
+  },
+  {
+    "id": 193,
+    "prompt": "A Romanian man once sued his Archbishop because the church's exorcism failed to rid his home of ________.",
+    "answer": "flatulent demons",
+    "decoys": [
+      "noisy ghosts",
+      "invisible goats",
+      "a horny devil"
+    ]
+  },
+  {
+    "id": 194,
+    "prompt": "In 2014, an American exchange student in Germany had to be rescued by 22 firefighters after getting trapped inside a giant, 32-ton outdoor sculpture of a ________.",
+    "answer": "stone vagina",
+    "decoys": [
+      "brass penis",
+      "bronze toilet",
+      "concrete breast"
+    ]
+  },
+  {
+    "id": 195,
+    "prompt": "Pope Stephen VI was so angry at his predecessor, Pope Formosus, that he had the dead Pope's corpse dug up, dressed in papal robes, and ________.",
+    "answer": "put on trial",
+    "decoys": [
+      "thrown in jail",
+      "fed to pigs",
+      "married to a nun"
+    ]
+  },
+  {
+    "id": 196,
+    "prompt": "A Florida man was arrested after he allegedly threw a ________ through a Wendy's drive-thru window.",
+    "answer": "live alligator",
+    "decoys": [
+      "dead raccoon",
+      "frozen turkey",
+      "lit firework"
+    ]
+  },
+  {
+    "id": 197,
+    "prompt": "In ancient Rome, wealthy women purchased the sweat of gladiators to use as a facial cream and ________.",
+    "answer": "an aphrodisiac",
+    "decoys": [
+      "a salad dressing",
+      "a perfume",
+      "a tooth whitener"
+    ]
+  },
+  {
+    "id": 198,
+    "prompt": "In 2015, a thief in the UK was caught because he accidentally left his ________ at the crime scene, which had his name written on it.",
+    "answer": "court summons",
+    "decoys": [
+      "probation officer",
+      "underwear",
+      "medical bill"
+    ]
+  },
+  {
+    "id": 199,
+    "prompt": "In the early 1900s, some weight loss pills shockingly contained ________ to help users lose weight.",
+    "answer": "tapeworm eggs",
+    "decoys": [
+      "strychnine",
+      "active coal",
+      "arsenic"
+    ]
+  },
+  {
+    "id": 200,
+    "prompt": "In 2008, a Swedish man was denied a personalized license plate because the text, \"3MTA3\", spelled out \"________\" when viewed in a rearview mirror.",
+    "answer": "EAT ME",
+    "decoys": [
+      "SEX TOY",
+      "I AM GAY",
+      "BAD ASS"
+    ]
+  },
+  {
+    "id": 201,
+    "prompt": "In 2012, a Swedish man was arrested by police after he attempted to split an atom inside his own _______.",
+    "answer": "kitchen",
+    "decoys": [
+      "microwave",
+      "bathtub",
+      "basement"
+    ]
+  },
+  {
+    "id": 202,
+    "prompt": "In 1995, the mayor of the French village Sarpourenx issued an official decree forbidding residents to _______.",
+    "answer": "die",
+    "decoys": [
+      "fart",
+      "get married",
+      "faint"
+    ]
+  },
+  {
+    "id": 203,
+    "prompt": "In 18th-century England, wealthy aristocrats showed off their status by hiring people to live in their gardens as ornamental _______.",
+    "answer": "hermits",
+    "decoys": [
+      "gnomes",
+      "statues",
+      "beggars"
+    ]
+  },
+  {
+    "id": 204,
+    "prompt": "In ancient Rome, citizens looking to whiten their teeth and freshen their breath used to rinse their mouths with _______.",
+    "answer": "urine",
+    "decoys": [
+      "goat milk",
+      "vinegar",
+      "crushed bugs"
+    ]
+  },
+  {
+    "id": 205,
+    "prompt": "In 1912, tailor Franz Reichelt tragically died after jumping off the Eiffel Tower to test his home-made _______.",
+    "answer": "parachute suit",
+    "decoys": [
+      "glider wings",
+      "helicopter hat",
+      "spring shoes"
+    ]
+  },
+  {
+    "id": 206,
+    "prompt": "In Victorian England, doctors frequently used early mechanical vibrators as a medical treatment for women diagnosed with _______.",
+    "answer": "hysteria",
+    "decoys": [
+      "laziness",
+      "bad blood",
+      "loud talking"
+    ]
+  },
+  {
+    "id": 207,
+    "prompt": "In 2013, thieves in Germany pulled off a bizarre heist by stealing 5 metric tons of _______ from a parked trailer.",
+    "answer": "Nutella",
+    "decoys": [
+      "sausage",
+      "gummy bears",
+      "toilet paper"
+    ]
+  },
+  {
+    "id": 208,
+    "prompt": "In the 13th century, Pope Gregory IX declared war on _______, claiming they were instruments of Satan, which indirectly helped spread the plague.",
+    "answer": "cats",
+    "decoys": [
+      "rats",
+      "toads",
+      "pigeons"
+    ]
+  },
+  {
+    "id": 209,
+    "prompt": "A Florida man was arrested in 2015 after attempting to rob a Wendy's drive-thru by throwing a live _______ through the window.",
+    "answer": "alligator",
+    "decoys": [
+      "raccoon",
+      "opossum",
+      "toilet seat"
+    ]
+  },
+  {
+    "id": 210,
+    "prompt": "To start his mornings with a burst of energy, US President John Quincy Adams famously went _______ in the Potomac River.",
+    "answer": "skinny-dipping",
+    "decoys": [
+      "screaming",
+      "boxing",
+      "dog paddling"
+    ]
+  }
+]
