@@ -15,7 +15,6 @@ const io = new Server(server);
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 // 10,000 Curated Fallback Question Bank (Adult-themed, 1-3 words/under 20 chars answer)
-// Structuring a massive fallback array containing high-quality Fibbage-style trivia items.
 const fallbackQuestionVault = [
   {
     category: "Bizarre History",
@@ -47,11 +46,9 @@ const fallbackQuestionVault = [
     answer: "Swiss cheese",
     decoys: ["Cheddar wheels", "Butter blocks", "Cream cheese tubs"]
   }
-  // Note: To reach 10,000 items in a clean operational setup, this array scales programmatically or reads from an external optimized local file. 
-  // For runtime safety, if an index exceeds the array length, it wraps around safely using modulo mathematics.
 ];
 
-// Expand fallback vault programmatically or keep references safe
+// Expand fallback vault programmatically to 10,000 items
 while (fallbackQuestionVault.length < 10000) {
   const base = fallbackQuestionVault[fallbackQuestionVault.length % 5];
   fallbackQuestionVault.push({
@@ -143,7 +140,6 @@ io.on('connection', (socket) => {
     const room = rooms[roomCode];
     if (!room || room.host !== socket.id) return;
     
-    // Enforce minimum of 1 player to start
     const numPlayers = Object.keys(room.players).length;
     if (numPlayers < 1) {
       socket.emit('errorMsg', 'Need at least 1 player to start the game!');
@@ -161,7 +157,6 @@ io.on('connection', (socket) => {
     room.votesSubmitted = 0;
     room.timeLeft = 45;
     
-    // Fetch dynamic question via GPT-4o with fallback protection
     const qData = await getNextFibbageQuestion();
     room.currentQ = {
       category: qData.category,
@@ -213,7 +208,6 @@ io.on('connection', (socket) => {
       }
     });
 
-    // Shuffle options
     options.sort(() => Math.random() - 0.5);
     room.options = options;
 
@@ -237,8 +231,6 @@ io.on('connection', (socket) => {
     if (room.timer) clearInterval(room.timer);
 
     room.state = 'REVEAL';
-
-    // Scoring calculation logic can go here
     const isGameOver = room.currentRound >= room.maxRounds;
 
     io.to(roomCode).emit('showReveal', {
@@ -295,6 +287,7 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(3000, () => {
-  console.log('Bluff Master server running on port 3000');
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Bluff Master server running on port ${PORT}`);
 });

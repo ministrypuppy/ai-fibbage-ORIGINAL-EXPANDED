@@ -1,13 +1,14 @@
 {
-  "name": "ai-fibbage-clone",
+  "name": "bluff-master",
   "version": "1.0.0",
-  "description": "",
+  "description": "Bluff Master Game Server",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "socket.io": "^4.6.1"
+    "express": "^4.19.2",
+    "openai": "^4.28.0",
+    "socket.io": "^4.7.5"
   }
 }
