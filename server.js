@@ -1,5 +1,5 @@
 /*******************************************************************************
- * BLUFF MASTER - SERVER BACKEND WITH OPENAI GPT-4O & 10,000 FALLBACK QUESTIONS
+ * BLUFF MASTER - SERVER BACKEND WITH OPENAI GPT-4O & RANDOMIZED 10,000 FALLBACKS
  ******************************************************************************/
 
 const express = require('express');
@@ -51,7 +51,7 @@ const fallbackQuestionVault = [
   }
 ];
 
-// Expand fallback vault programmatically to 10,000 items
+// Expand fallback vault programmatically to 10,000 items with unique variants
 while (fallbackQuestionVault.length < 10000) {
   const base = fallbackQuestionVault[fallbackQuestionVault.length % 5];
   fallbackQuestionVault.push({
@@ -62,7 +62,8 @@ while (fallbackQuestionVault.length < 10000) {
   });
 }
 
-let fallbackIndex = 0;
+// Start at a random index so restarts don't trigger the exact same sequence
+let fallbackIndex = Math.floor(Math.random() * fallbackQuestionVault.length);
 
 async function getNextFibbageQuestion() {
   try {
@@ -87,7 +88,7 @@ async function getNextFibbageQuestion() {
     }
     throw new Error("Invalid structure from OpenAI");
   } catch (err) {
-    console.warn("OpenAI API call failed or timed out. Falling back to 10,000-question backup vault.", err.message);
+    console.warn("OpenAI API call failed or timed out. Falling back to backup vault.", err.message);
     const q = fallbackQuestionVault[fallbackIndex % fallbackQuestionVault.length];
     fallbackIndex++;
     return q;
