@@ -1,10 +1,10 @@
-<!-- index.html (REPLACES your entire index.html file) -->
+<!-- index.html (REPLACES your entire index.html file to restore the original host screen) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trivia Host Screen</title>
+    <title>Host Screen</title>
     <style>
         body {
             background-color: #121212;
@@ -46,33 +46,19 @@
             width: 100%;
             margin-top: 20px;
         }
-        .btn-start:hover {
-            background-color: #e02e5b;
-        }
     </style>
 </head>
 <body>
     <div class="host-card">
+        <div style="text-align: right; margin-bottom: 10px;">
+            <button style="background: #2a2a3f; color: white; border: none; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem;">🔊 Audio: ON</button>
+        </div>
         <h1>HOST SCREEN</h1>
         <p>Join at this URL on your phone!</p>
         <p>ROOM CODE:</p>
-        <div id="room-code-display" class="room-code">----</div>
+        <div class="room-code">- - - -</div>
         <p>Players Joined:</p>
         <button class="btn-start">Start Game</button>
     </div>
-
-    <script>
-        async function loadRoomCode() {
-            try {
-                const response = await fetch('/api/create-room', { method: 'POST' });
-                const data = await response.json();
-                const display = document.getElementById('room-code-display');
-                if (display) display.innerText = data.roomCode;
-            } catch (err) {
-                console.error('Failed to load room code', err);
-            }
-        }
-        loadRoomCode();
-    </script>
 </body>
 </html>
